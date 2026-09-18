@@ -41,6 +41,12 @@ def destination_url(value):
 
 @transaction.atomic
 def enqueue_publish(actor, creative, data):
+    from django.conf import settings
+
+    if not settings.META_PUBLISH_ENABLED:
+        raise ValidationError(
+            "Meta publishing is beta and disabled until live acceptance is completed."
+        )
     require(actor, creative.workspace_id, "publish_ads")
     version = creative.approved_version
     if not version:

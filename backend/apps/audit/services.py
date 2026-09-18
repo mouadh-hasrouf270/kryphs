@@ -39,7 +39,23 @@ def record(actor, obj, action, summary=None, notify=True):
             ):
                 continue
             prefs = getattr(getattr(member.user, "profile", None), "notification_preferences", {})
-            if prefs.get(action) is False:
+            if obj._meta.model_name in [
+                "creativerequest",
+                "requestdeliverable",
+                "requestdeliverableassignment",
+            ]:
+                from apps.workspaces.policies import visible_requests
+
+                request_id = (
+                    obj.pk
+                    if obj._meta.model_name == "creativerequest"
+                    else obj.request_id
+                    if obj._meta.model_name == "requestdeliverable"
+                    else obj.deliverable.request_id
+                )
+                if not visible_requests(member.user, workspace.pk).filter(pk=request_id).exists():
+                    continue
+            if prefs.get(action) is False or prefs.get("in_app") is False:
                 continue
             if (
                 action in ["approved", "ready_for_review", "changes_requested"]

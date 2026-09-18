@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "checks": [
+    "empty database migrated",
+    "production deploy checks passed",
+    "same-origin React, health, readiness and anonymous session served by Waitress",
+    "production login, workspace and aggregate request with two platforms",
+    "worker claimed and safely failed an unsupported test job",
+    "request and authenticated session persisted across web restart",
+    "production-format backup restored; integrity and request count verified",
+    "SQLite WAL verified"
+  ],
+  "limitations": [
+    "No public DNS/TLS certificate test",
+    "No live Google, Meta or SMTP credentials used"
+  ]
+}

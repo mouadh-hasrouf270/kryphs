@@ -22,6 +22,7 @@ def save_member(actor, workspace, data):
     email = str(data.get("email", "")).lower()
     validate_email(email)
     user = User.objects.filter(email=email).first()
+    existing = user is not None
     if not user:
         password = data.get("password", "")
         validate_password(password)
@@ -54,6 +55,19 @@ def save_member(actor, workspace, data):
         raise ValidationError("Ask another manager to change your own administrative access.")
     member.save()
     member.brands.set(brands)
+    if existing and data.get("reset_password"):
+        if user.is_superuser or (
+            not actor.is_superuser
+            and WorkspaceMembership.objects.filter(user=user, active=True)
+            .exclude(workspace_id=workspace)
+            .exists()
+        ):
+            raise PermissionDenied("A platform administrator must reset a cross-workspace account.")
+        password = data.get("password", "")
+        validate_password(password, user)
+        user.set_password(password)
+        user.must_change_password = True
+        user.save(update_fields=["password", "must_change_password"])
     record(
         actor,
         member,

@@ -56,6 +56,11 @@ def user_payload(user):
             for w in Workspace.objects.filter(active=True)
         ]
     return {
+        "capabilities": {
+            "meta_publish": settings.META_PUBLISH_ENABLED,
+            "youtube_publish": settings.YOUTUBE_PUBLISH_ENABLED,
+            "google_oauth": bool(settings.GOOGLE_CLIENT_ID and settings.GOOGLE_CLIENT_SECRET),
+        },
         "id": str(user.pk),
         "email": user.email,
         "display_name": user.display_name,
@@ -143,11 +148,22 @@ class PasswordResetView(APIView):
     throttle_classes = [LoginThrottle]
 
     def post(self, request):
+        if not settings.PASSWORD_RESET_ENABLED:
+            return Response(
+                {
+                    "detail": "Password reset email is unavailable. Contact your workspace administrator."
+                },
+                status=503,
+            )
+        from urllib.parse import urlparse
+
+        public = urlparse(settings.APP_BASE_URL)
         form = PasswordResetForm({"email": request.data.get("email", "")})
         if form.is_valid():
             form.save(
                 request=request,
-                use_https=not settings.DEBUG,
+                use_https=public.scheme == "https",
+                domain_override=public.netloc,
                 email_template_name="registration/password_reset_email.html",
                 subject_template_name="registration/password_reset_subject.txt",
             )

@@ -16,8 +16,59 @@ def serializer_for(model):
         class Meta:
             pass
 
+        def to_representation(self, instance):
+            from apps.common.labels import display_label
+            from apps.workspaces.policies import visible_requests
+
+            result = super().to_representation(instance)
+            result["display_label"] = display_label(instance)
+            labels = {}
+            req = self.context.get("request")
+            for field in instance._meta.fields:
+                if (
+                    field.is_relation
+                    and field.name in result
+                    and getattr(instance, field.attname, None)
+                ):
+                    related = getattr(instance, field.name)
+                    if (
+                        req
+                        and related._meta.label == "requests_app.CreativeRequest"
+                        and not visible_requests(req.user, instance.workspace_id)
+                        .filter(pk=related.pk)
+                        .exists()
+                    ):
+                        labels[field.name] = "Restricted request"
+                    else:
+                        labels[field.name] = display_label(related)
+            for field in instance._meta.many_to_many:
+                if field.name in result:
+                    labels[field.name] = [
+                        display_label(obj) for obj in getattr(instance, field.name).all()
+                    ]
+            result["relation_labels"] = labels
+            if instance._meta.model_name == "creativefile":
+                asset = instance.storage_object
+                result["asset"] = {
+                    name: getattr(asset, name)
+                    for name in [
+                        "filename",
+                        "provider",
+                        "mime_type",
+                        "size",
+                        "width",
+                        "height",
+                        "duration",
+                        "active",
+                        "external_id",
+                    ]
+                }
+            return result
+
         def get_fields(self):
             result = super().get_fields()
+            if model._meta.model_name == "requestdeliverable" and "sequence" in result:
+                result["sequence"].required = False
             req = self.context.get("request")
             workspace = self.context.get("workspace")
             if req and workspace:
@@ -44,6 +95,37 @@ def serializer_for(model):
         def validate(self, attrs):
             req = self.context["request"]
             workspace = self.context["workspace"]
+            if model._meta.model_name == "requestdeliverableassignment":
+                deliverable = attrs.get("deliverable", getattr(self.instance, "deliverable", None))
+                if deliverable:
+                    attrs["brand"] = deliverable.brand
+            if model._meta.model_name == "creative":
+                from apps.creatives.services import bind_deliverable
+
+                attrs = bind_deliverable(attrs, self.instance)
+            if model._meta.model_name == "requestdeliverable":
+                parent = attrs.get("request", getattr(self.instance, "request", None))
+                if parent:
+                    attrs.setdefault("brand", parent.brand)
+                    if attrs["brand"] != parent.brand:
+                        raise serializers.ValidationError(
+                            {"brand": "Deliverable must match the request brand."}
+                        )
+                    from apps.creatives.models import Creative
+
+                    if (
+                        not self.instance
+                        and Creative.objects.filter(
+                            request=parent, deliverable__isnull=True
+                        ).exists()
+                    ):
+                        raise serializers.ValidationError(
+                            {
+                                "request": "This request already has direct creatives. Finish it before adding deliverables."
+                            }
+                        )
+                if attrs.get("quantity", 1) < 1:
+                    raise serializers.ValidationError({"quantity": "Must be at least one."})
             brand = attrs.get("brand", getattr(self.instance, "brand", None))
             for key in ["title", "name"]:
                 if (
@@ -71,6 +153,12 @@ def serializer_for(model):
             if model._meta.label != "catalog.Brand":
                 validate_scope(req.user, workspace, brand)
             for key in ["owner", "assigned_editor"]:
+                if (
+                    self.instance
+                    and key in attrs
+                    and attrs[key] != getattr(self.instance, key, None)
+                ):
+                    require(req.user, workspace, "assign_editors")
                 if key in attrs and attrs[key] is not None:
                     if self.instance or attrs[key] != req.user:
                         require(req.user, workspace, "assign_editors")
@@ -102,6 +190,43 @@ def serializer_for(model):
                             {name: "Related record must belong to the same brand."}
                         )
             if self.instance:
+                if model._meta.model_name == "storageconnection":
+                    from apps.storage.models import DriveFolderMapping, StorageObject
+
+                    used = (
+                        DriveFolderMapping.objects.filter(connection=self.instance).exists()
+                        or StorageObject.objects.filter(connection=self.instance).exists()
+                    )
+                    if used:
+                        for name in ["root_folder_id", "shared_drive_id", "provider"]:
+                            if name in attrs and attrs[name] != getattr(self.instance, name):
+                                raise serializers.ValidationError(
+                                    {
+                                        name: "This connection has managed files. Create a new connection to change its storage boundary."
+                                    }
+                                )
+                if model._meta.model_name == "deployment":
+                    from apps.performance.models import PerformanceSnapshot
+
+                    locked = (
+                        self.instance.ad_id
+                        or PerformanceSnapshot.objects.filter(deployment=self.instance).exists()
+                    )
+                    if locked:
+                        for name in [
+                            "provider",
+                            "external_account_id",
+                            "campaign_id",
+                            "adset_id",
+                            "ad_id",
+                            "connection",
+                        ]:
+                            if name in attrs and attrs[name] != getattr(self.instance, name):
+                                raise serializers.ValidationError(
+                                    {
+                                        name: "Deployment identity is locked. Create a corrected deployment to preserve history."
+                                    }
+                                )
                 for name in [
                     "brand",
                     "creative",
@@ -129,7 +254,11 @@ def serializer_for(model):
                     {"version": "Version belongs to a different creative."}
                 )
             deliverable, request = value("deliverable"), value("request")
-            if deliverable and (not request or deliverable.request_id != request.pk):
+            if (
+                deliverable
+                and any(f.name == "request" for f in model._meta.fields)
+                and (not request or deliverable.request_id != request.pk)
+            ):
                 raise serializers.ValidationError(
                     {"deliverable": "Deliverable must belong to the selected request."}
                 )
@@ -211,4 +340,11 @@ def serializer_for(model):
     ScopedSerializer.Meta.model = model
     ScopedSerializer.Meta.fields = fields
     ScopedSerializer.Meta.read_only_fields = read_only
+    # RequestDeliverable.sequence is allocated by ScopedViewSet.perform_create().
+    # DRF otherwise generates a UniqueTogetherValidator for (request, sequence)
+    # and rejects the request *before* perform_create can allocate the sequence.
+    # Keep the database UniqueConstraint as the integrity boundary and remove the
+    # inappropriate client-side validator for this server-managed field.
+    if model._meta.model_name == "requestdeliverable":
+        ScopedSerializer.Meta.validators = []
     return ScopedSerializer

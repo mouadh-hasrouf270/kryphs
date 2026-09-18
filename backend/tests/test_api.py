@@ -3,14 +3,13 @@ from django.test import Client
 from apps.creatives.models import Creative
 from apps.creatives.services import new_version
 from apps.integrations.crypto import seal
+from apps.requests_app.models import CreativeRequest
 from apps.storage.models import StorageConnection
 from apps.workspaces.models import WorkspaceMembership
 
 
 def url(team, path):
     return f"/api/v1/{path}/?workspace={team['ws'].pk}"
-
-
 
 
 def test_request_create_with_platforms_does_not_500(team, client_for):

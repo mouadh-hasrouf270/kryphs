@@ -148,7 +148,18 @@ def enqueue_transfer(actor, connection, data):
     if not version:
         raise ValidationError("Version unavailable.")
     provider = data.get("provider", "google_drive")
+    if provider not in ["google_drive", "youtube"]:
+        raise ValidationError({"provider": "Unsupported upload provider."})
     if provider == "youtube":
+        from django.conf import settings
+
+        if (
+            not settings.YOUTUBE_PUBLISH_ENABLED
+            or "https://www.googleapis.com/auth/youtube.upload" not in connection.scopes
+        ):
+            raise ValidationError(
+                "YouTube publishing is not configured and accepted for this connection."
+            )
         require(actor, connection.workspace_id, "publish_ads")
         obj = master(version)
     else:

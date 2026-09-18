@@ -70,7 +70,81 @@ def scope(queryset, user, workspace):
         if queryset.model._meta.label == "catalog.Brand":
             return queryset.filter(pk__in=member.brands.values("pk"))
         if any(f.name == "brand" for f in queryset.model._meta.fields):
-            return queryset.filter(brand_id__in=member.brands.values("pk"))
+            queryset = queryset.filter(brand_id__in=member.brands.values("pk"))
+    label = queryset.model._meta.label
+    if label == "requests_app.CreativeRequest":
+        return queryset.filter(pk__in=visible_requests(user, workspace).values("pk"))
+    if label in ["requests_app.RequestDeliverable", "requests_app.RequestSourceMaterial"]:
+        return queryset.filter(request_id__in=visible_requests(user, workspace).values("pk"))
+    if label == "requests_app.RequestDeliverableAssignment":
+        return queryset.filter(
+            deliverable__request_id__in=visible_requests(user, workspace).values("pk")
+        )
+    if label == "requests_app.SourceMaterialUsage":
+        return queryset.filter(
+            source__request_id__in=visible_requests(user, workspace).values("pk")
+        )
+    if (
+        label in ["audit.Activity", "audit.AuditEvent"]
+        and member
+        and member.role not in ["manager", "reviewer"]
+    ):
+        from django.db.models import CharField, Q, Value
+        from django.db.models.functions import Cast, Replace
+
+        from apps.requests_app.models import RequestDeliverable, RequestDeliverableAssignment
+
+        visible = visible_requests(user, workspace)
+        # Audit stores string UUIDs; SQLite's UUID columns store hex without hyphens.
+        queryset = queryset.annotate(_object_hex=Replace("object_id", Value("-"), Value("")))
+        queryset = queryset.filter(
+            ~Q(
+                object_type__in=[
+                    "creativerequest",
+                    "requestdeliverable",
+                    "requestdeliverableassignment",
+                ]
+            )
+            | Q(
+                object_type="creativerequest",
+                _object_hex__in=visible.annotate(
+                    hex_id=Replace(Cast("pk", CharField()), Value("-"), Value(""))
+                ).values("hex_id"),
+            )
+            | Q(
+                object_type="requestdeliverable",
+                _object_hex__in=RequestDeliverable.objects.filter(request__in=visible)
+                .annotate(hex_id=Replace(Cast("pk", CharField()), Value("-"), Value("")))
+                .values("hex_id"),
+            )
+            | Q(
+                object_type="requestdeliverableassignment",
+                _object_hex__in=RequestDeliverableAssignment.objects.filter(
+                    deliverable__request__in=visible
+                )
+                .annotate(hex_id=Replace(Cast("pk", CharField()), Value("-"), Value("")))
+                .values("hex_id"),
+            )
+        )
+    return queryset
+
+
+def visible_requests(user, workspace):
+    from django.db.models import Q
+
+    from apps.requests_app.models import CreativeRequest
+
+    member = membership(user, workspace)
+    queryset = CreativeRequest.objects.filter(workspace_id=workspace)
+    if member and member.brand_restricted:
+        queryset = queryset.filter(brand_id__in=member.brands.values("pk"))
+    if member and member.role not in ["manager", "reviewer"]:
+        queryset = queryset.filter(
+            Q(requester=user)
+            | Q(owner=user)
+            | Q(deliverables__assigned_editor=user)
+            | Q(deliverables__assignments__user=user)
+        ).distinct()
     return queryset
 
 

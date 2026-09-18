@@ -42,17 +42,28 @@ def approve(actor, version):
 
 
 @transaction.atomic
-def decide_proposal(actor,proposal,decision):
-    require(actor,proposal.workspace_id,'manage_lineage')
-    validate_scope(actor,proposal.workspace_id,proposal.brand)
-    proposal=type(proposal).objects.get(pk=proposal.pk)
-    if proposal.status!='proposed' or decision not in ['accept','reject']:
-        raise ValidationError('Only an open proposal can be decided.')
-    if decision=='accept':
+def decide_proposal(actor, proposal, decision):
+    require(actor, proposal.workspace_id, "manage_lineage")
+    validate_scope(actor, proposal.workspace_id, proposal.brand)
+    proposal = type(proposal).objects.get(pk=proposal.pk)
+    if proposal.status != "proposed" or decision not in ["accept", "reject"]:
+        raise ValidationError("Only an open proposal can be decided.")
+    if decision == "accept":
         from apps.creatives.services import related
-        proposal.resulting_creative=related(actor,proposal.source,{'title':proposal.title,'relationship':'variant','hypothesis':proposal.rationale,'what_changed':proposal.proposed_change})
-        proposal.status='accepted'
-    else:proposal.status='rejected'
+
+        proposal.resulting_creative = related(
+            actor,
+            proposal.source,
+            {
+                "title": proposal.title,
+                "relationship": "variant",
+                "hypothesis": proposal.rationale,
+                "what_changed": proposal.proposed_change,
+            },
+        )
+        proposal.status = "accepted"
+    else:
+        proposal.status = "rejected"
     proposal.save()
-    record(actor,proposal,'proposal_'+proposal.status)
+    record(actor, proposal, "proposal_" + proposal.status)
     return proposal

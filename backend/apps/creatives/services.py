@@ -9,6 +9,49 @@ from apps.requests_app.services import code, rollup
 from apps.workspaces.policies import permissions, require, validate_scope
 
 
+def bind_deliverable(data, instance=None):
+    data = dict(data)
+    deliverable = data.get("deliverable", getattr(instance, "deliverable", None))
+    request = data.get("request", getattr(instance, "request", None))
+    if deliverable:
+        if request and request.pk != deliverable.request_id:
+            raise ValidationError({"request": "Deliverable belongs to a different request."})
+        request = deliverable.request
+        data["request"] = request
+        for key, expected in [
+            ("brand", request.brand),
+            ("product", request.product),
+            ("campaign", request.campaign),
+        ]:
+            actual = data.get(key, getattr(instance, key, None))
+            if actual is not None and actual != expected:
+                raise ValidationError({key: "Must match the deliverable request."})
+            data[key] = expected
+        if not instance:
+            data.setdefault("creative_type", deliverable.creative_type)
+            if deliverable.assigned_editor_id:
+                data.setdefault("owner", deliverable.assigned_editor)
+    elif request and request.deliverables.exists():
+        raise ValidationError({"deliverable": "Select the deliverable this creative fulfills."})
+    return data
+
+
+@transaction.atomic
+def create_creative(actor, data):
+    data = bind_deliverable(data)
+    require(actor, data["workspace"].pk, "edit_creatives")
+    validate_scope(actor, data["workspace"].pk, data.get("brand"))
+    tags = data.pop("tags", [])
+    data.setdefault("owner", actor)
+    obj = Creative.objects.create(
+        **data, code=code("CR"), status="assigned" if data.get("owner") else "new"
+    )
+    obj.tags.set(tags)
+    rollup(obj)
+    record(actor, obj, "created")
+    return obj
+
+
 def editor_access(actor, creative):
     require(actor, creative.workspace_id, "submit_version")
     validate_scope(actor, creative.workspace_id, creative.brand)

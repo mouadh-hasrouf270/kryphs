@@ -4,6 +4,8 @@ from apps.common.models import Scoped
 
 
 class CreativeRequest(Scoped):
+    submission_key = models.CharField(max_length=100, null=True, blank=True)
+    submission_hash = models.CharField(max_length=64, blank=True)
     code = models.CharField(max_length=40, unique=True)
     title = models.CharField(max_length=200, default="", blank=True)
     objective = models.TextField(blank=True)
@@ -42,6 +44,17 @@ class CreativeRequest(Scoped):
     completed_at = models.DateTimeField(null=True, blank=True)
     published_at = models.DateTimeField(null=True, blank=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["workspace", "requester", "submission_key"], name="request_submission_key"
+            )
+        ]
+        indexes = [
+            models.Index(fields=["workspace", "status"]),
+            models.Index(fields=["workspace", "due_date"]),
+        ]
+
     def __str__(self):
         return self.title
 
@@ -69,6 +82,9 @@ class RequestDeliverable(Scoped):
     quantity = models.PositiveIntegerField(default=1)
     duration_target = models.PositiveIntegerField(default=0)
     requirements = models.TextField(blank=True)
+    hook = models.TextField(blank=True)
+    script = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
     assigned_editor = models.ForeignKey(
         "accounts.User", on_delete=models.PROTECT, related_name="+", null=True, blank=True
     )
@@ -89,6 +105,7 @@ class RequestDeliverable(Scoped):
     )
 
     class Meta:
+        indexes = [models.Index(fields=["assigned_editor", "status"])]
         constraints = [
             models.UniqueConstraint(fields=["request", "sequence"], name="deliverable_sequence"),
             models.CheckConstraint(condition=models.Q(quantity__gte=1), name="positive_quantity"),
@@ -96,6 +113,46 @@ class RequestDeliverable(Scoped):
 
     def __str__(self):
         return self.title
+
+
+class RequestDeliverableAssignment(Scoped):
+    """Production responsibility; never grants a workspace permission."""
+
+    deliverable = models.ForeignKey(
+        RequestDeliverable, on_delete=models.PROTECT, related_name="assignments"
+    )
+    user = models.ForeignKey(
+        "accounts.User", on_delete=models.PROTECT, related_name="deliverable_assignments"
+    )
+    role = models.CharField(
+        max_length=40,
+        choices=[
+            (role, role)
+            for role in [
+                "editor",
+                "filming_responsible",
+                "scriptwriter",
+                "designer",
+                "photographer",
+                "voice_over",
+                "content_creator",
+                "other",
+            ]
+        ],
+    )
+    notes = models.TextField(blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["deliverable", "user", "role"], name="deliverable_person_role"
+            ),
+            models.UniqueConstraint(
+                fields=["deliverable"],
+                condition=models.Q(role="editor"),
+                name="deliverable_primary_editor",
+            ),
+        ]
 
 
 class RequestSourceMaterial(Scoped):

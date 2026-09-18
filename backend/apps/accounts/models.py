@@ -45,7 +45,7 @@ class UserProfile(models.Model):
     preferred_language = models.CharField(
         max_length=2, choices=[("ar", "Arabic"), ("en", "English"), ("fr", "French")], default="ar"
     )
-    timezone = models.CharField(max_length=80, default="Africa/Lagos")
+    timezone = models.CharField(max_length=80, default="Africa/Algiers")
     locale = models.CharField(max_length=30, default="ar")
     notification_preferences = models.JSONField(default=dict)
     theme = models.CharField(max_length=20, default="light")

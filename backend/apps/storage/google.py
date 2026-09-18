@@ -17,10 +17,8 @@ from rest_framework.exceptions import ValidationError
 from apps.audit.services import record
 from apps.integrations.crypto import seal, unseal
 from apps.storage.models import (
-    DriveFolderMapping,
     StorageConnection,
     StorageObject,
-    SyncRun,
 )
 from apps.storage.services import local_path, master
 from apps.workspaces.policies import require, validate_scope
@@ -33,6 +31,7 @@ class ProviderFailure(Exception):
 
 
 def request(method, url, **kwargs):
+    accepted = kwargs.pop("accepted", [200, 201, 204, 308])
     try:
         response = httpx.request(
             method, url, timeout=settings.PROVIDER_TIMEOUT, follow_redirects=False, **kwargs
@@ -41,7 +40,7 @@ def request(method, url, **kwargs):
         raise ProviderFailure(
             "Google request failed or timed out; retry after checking connection."
         ) from None
-    if response.status_code not in [200, 201, 204, 308]:
+    if response.status_code not in accepted:
         raise ProviderFailure(
             f"Google returned HTTP {response.status_code}; check authorization, quota and provider configuration."
         )
@@ -117,7 +116,16 @@ def callback(request_obj):
         if not response.get("refresh_token"):
             raise ProviderFailure("No refresh token returned; revoke the old grant and reconnect.")
         connection.credentials_encrypted = seal({"refresh_token": response["refresh_token"]})
-        connection.scopes = flow["scopes"]
+        connection.scopes = response.get("scope", " ".join(flow["scopes"])).split()
+        access = response.get("access_token")
+        if access:
+            about = request(
+                "GET",
+                DRIVE + "/about",
+                headers={"Authorization": "Bearer " + access},
+                params={"fields": "user(emailAddress)"},
+            ).json()
+            connection.account_email = about.get("user", {}).get("emailAddress", "")
         connection.status = "connected"
         connection.last_error = ""
         connection.save()
@@ -128,6 +136,8 @@ def callback(request_obj):
 
 
 def token(connection):
+    if connection.status != "connected" or not connection.credentials_encrypted:
+        raise ProviderFailure("Google connection is disconnected. Reconnect before continuing.")
     credentials = unseal(connection.credentials_encrypted)
     try:
         result = request(
@@ -168,80 +178,16 @@ def upsert(connection, metadata):
                 "checksum": metadata.get("md5Checksum", ""),
                 "parents": metadata.get("parents", []),
                 "active": not metadata.get("trashed", False),
+                "metadata": {"availability": "trashed" if metadata.get("trashed") else "available"},
             },
         )
     return obj
 
 
-def sync(connection):
-    run = SyncRun.objects.create(
-        workspace=connection.workspace, brand=connection.brand, connection=connection
-    )
-    headers = {"Authorization": "Bearer " + token(connection)}
-    count = 0
-    try:
-        if connection.change_token:
-            page = connection.change_token
-            while page:
-                params = {
-                    "pageToken": page,
-                    "supportsAllDrives": "true",
-                    "includeItemsFromAllDrives": "true",
-                    "fields": "nextPageToken,newStartPageToken,changes(fileId,removed,file(id,name,mimeType,size,md5Checksum,parents,trashed))",
-                }
-                result = request("GET", DRIVE + "/changes", headers=headers, params=params).json()
-                for change in result.get("changes", []):
-                    if change.get("removed"):
-                        StorageObject.objects.filter(
-                            connection=connection, external_id=change["fileId"]
-                        ).update(active=False)
-                    elif change.get("file"):
-                        upsert(connection, change["file"])
-                    count += 1
-                page = result.get("nextPageToken")
-                if result.get("newStartPageToken"):
-                    connection.change_token = result["newStartPageToken"]
-        else:
-            params = {"supportsAllDrives": "true"}
-            if connection.shared_drive_id:
-                params["driveId"] = connection.shared_drive_id
-            start = request(
-                "GET", DRIVE + "/changes/startPageToken", headers=headers, params=params
-            ).json()["startPageToken"]
-            page = None
-            while True:
-                params = {
-                    "pageSize": 100,
-                    "supportsAllDrives": "true",
-                    "includeItemsFromAllDrives": "true",
-                    "fields": "nextPageToken,files(id,name,mimeType,size,md5Checksum,parents,trashed)",
-                }
-                if page:
-                    params["pageToken"] = page
-                if connection.shared_drive_id:
-                    params.update(corpora="drive", driveId=connection.shared_drive_id)
-                result = request("GET", DRIVE + "/files", headers=headers, params=params).json()
-                for item in result.get("files", []):
-                    upsert(connection, item)
-                    count += 1
-                page = result.get("nextPageToken")
-                if not page:
-                    break
-            connection.change_token = start
-        connection.last_sync = timezone.now()
-        connection.last_error = ""
-        connection.status = "connected"
-        connection.save()
-        run.status = "succeeded"
-        run.object_count = count
-        run.completed_at = timezone.now()
-        run.save()
-        record(connection.created_by, connection, "drive_synced", {"objects": count})
-    except Exception:
-        run.status = "failed"
-        run.error = "Drive sync failed; verify connection and retry."
-        run.save()
-        raise
+def sync(connection, heartbeat=lambda: None):
+    from apps.storage.drive_tree import sync as scoped_sync
+
+    return scoped_sync(connection, heartbeat)
 
 
 def safe_session(uri):
@@ -273,6 +219,11 @@ def resume(upload, heartbeat=lambda: None):
             raise ProviderFailure(
                 "Upload initialization is uncertain. Reconcile with the provider before creating a new upload."
             )
+        folder_id = None
+        if upload.provider == "google_drive":
+            from apps.storage.drive_tree import upload_folder
+
+            folder_id = upload_folder(upload, heartbeat)
         upload.status = "initializing"
         upload.save(update_fields=["status"])
         if upload.provider == "youtube":
@@ -298,8 +249,7 @@ def resume(upload, heartbeat=lambda: None):
                     "upload_id": str(upload.pk),
                 },
             }
-            if connection.root_folder_id:
-                body["parents"] = [connection.root_folder_id]
+            body["parents"] = [folder_id]
         result = request(
             "POST",
             url,
@@ -407,65 +357,7 @@ def confirm(upload, result):
     record(upload.created_by, upload, "upload_complete", {"external_id": external_id})
 
 
-def organize(connection):
-    headers = {"Authorization": "Bearer " + token(connection)}
-    if not connection.root_folder_id:
-        raise ProviderFailure("Select a Drive root folder before organizing.")
-    from apps.creatives.models import Creative
+def organize(connection, heartbeat=lambda: None):
+    from apps.storage.drive_tree import organize as organize_tree
 
-    for creative in Creative.objects.filter(workspace=connection.workspace, brand=connection.brand):
-        mapping = DriveFolderMapping.objects.filter(
-            connection=connection, entity_type="creative", entity_id=creative.pk, folder_role="root"
-        ).first()
-        if mapping:
-            continue
-        # Search appProperties to reconcile a previous confirmed create whose DB write failed.
-        q = (
-            "trashed=false and appProperties has { key='creative_id' and value='"
-            + str(creative.pk)
-            + "' } and mimeType='application/vnd.google-apps.folder'"
-        )
-        found = (
-            request(
-                "GET",
-                DRIVE + "/files",
-                headers=headers,
-                params={
-                    "q": q,
-                    "supportsAllDrives": "true",
-                    "includeItemsFromAllDrives": "true",
-                    "fields": "files(id)",
-                },
-            )
-            .json()
-            .get("files", [])
-        )
-        receipt = (
-            found[0]
-            if found
-            else request(
-                "POST",
-                DRIVE + "/files",
-                headers=headers,
-                params={"supportsAllDrives": "true", "fields": "id"},
-                json={
-                    "name": creative.code,
-                    "mimeType": "application/vnd.google-apps.folder",
-                    "parents": [connection.root_folder_id],
-                    "appProperties": {"app": "creative_manager", "creative_id": str(creative.pk)},
-                },
-            ).json()
-        )
-        if not receipt.get("id"):
-            raise ProviderFailure("Folder creation returned no identity.")
-        DriveFolderMapping.objects.get_or_create(
-            connection=connection,
-            entity_type="creative",
-            entity_id=creative.pk,
-            folder_role="root",
-            defaults={
-                "workspace": connection.workspace,
-                "brand": connection.brand,
-                "drive_folder_id": receipt["id"],
-            },
-        )
+    return organize_tree(connection, heartbeat)

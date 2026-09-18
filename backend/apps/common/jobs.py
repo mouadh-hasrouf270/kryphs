@@ -81,7 +81,12 @@ def handle(job):
         connection = StorageConnection.objects.get(
             pk=job.payload["connection"], workspace=job.workspace
         )
-        {"drive_sync": sync, "drive_test": token, "drive_organize": organize}[job.type](connection)
+        if job.type == "drive_test":
+            token(connection)
+        else:
+            {"drive_sync": sync, "drive_organize": organize}[job.type](
+                connection, lambda: heartbeat(job)
+            )
     else:
         raise ValueError("Unregistered job handler")
 
@@ -93,7 +98,7 @@ def run_once():
     logger.info("job_started id=%s type=%s attempt=%s", job.pk, job.type, job.attempts)
     try:
         handle(job)
-    except Exception:
+    except Exception as exc:
         # Never persist provider exception payloads: they may contain credentials.
         job.last_error = (
             "Operation failed. Check provider configuration and the domain operation record."
@@ -101,6 +106,20 @@ def run_once():
         job.status = (
             "failed" if job.attempts >= job.max_attempts or job.type == "publish" else "queued"
         )
+        if job.type == "google_upload":
+            from apps.storage.google import ProviderFailure
+            from apps.storage.models import Upload
+
+            upload = Upload.objects.filter(
+                pk=job.payload.get("upload"), workspace=job.workspace
+            ).first()
+            if upload:
+                upload.last_error = str(exc) if isinstance(exc, ProviderFailure) else job.last_error
+                if upload.status == "initializing" and not upload.session_encrypted:
+                    job.status = "failed"
+                elif job.status == "failed":
+                    upload.status = "failed"
+                upload.save(update_fields=["last_error", "status"])
         job.available_at = timezone.now() + timedelta(seconds=min(3600, 2**job.attempts * 15))
         if job.status == "failed":
             job.failed_at = timezone.now()

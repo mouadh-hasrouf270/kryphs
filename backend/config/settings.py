@@ -12,6 +12,31 @@ if not SECRET_KEY:
         "Set DJANGO_SECRET_KEY in .env; run scripts/setup_local.py for local development."
     )
 APP_ENCRYPTION_KEY = os.getenv("APP_ENCRYPTION_KEY", "")
+APP_BASE_URL = os.getenv("APP_BASE_URL", "http://127.0.0.1:5173").rstrip("/")
+if not DEBUG:
+    from urllib.parse import urlparse
+
+    from cryptography.fernet import Fernet
+
+    if len(SECRET_KEY) < 50:
+        raise RuntimeError("Production DJANGO_SECRET_KEY must contain at least 50 characters.")
+    try:
+        Fernet(APP_ENCRYPTION_KEY.encode())
+    except (ValueError, TypeError):
+        raise RuntimeError("Production requires a valid stable APP_ENCRYPTION_KEY.") from None
+    if urlparse(APP_BASE_URL).scheme != "https":
+        raise RuntimeError("Production APP_BASE_URL must use HTTPS.")
+    for required in [
+        "DJANGO_ALLOWED_HOSTS",
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "DATABASE_PATH",
+        "MEDIA_ROOT",
+    ]:
+        if not os.getenv(required):
+            raise RuntimeError(f"Production requires {required}.")
+FRONTEND_DIST = Path(os.getenv("FRONTEND_DIST") or str(BASE_DIR.parent / "frontend" / "dist"))
+META_PUBLISH_ENABLED = os.getenv("META_PUBLISH_ENABLED", "false").lower() == "true"
+YOUTUBE_PUBLISH_ENABLED = os.getenv("YOUTUBE_PUBLISH_ENABLED", "false").lower() == "true"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",")
 CSRF_TRUSTED_ORIGINS = [
     x
@@ -98,7 +123,8 @@ SESSION_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 SECURE_SSL_REDIRECT = not DEBUG
-SECURE_HSTS_SECONDS = int(os.getenv("SECURE_HSTS_SECONDS", "0"))
+SECURE_REDIRECT_EXEMPT = [r"^api/v1/health/$", r"^api/v1/ready/$"]
+SECURE_HSTS_SECONDS = int(os.getenv("SECURE_HSTS_SECONDS", "0" if DEBUG else "31536000"))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -111,6 +137,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "false") == "true"
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@localhost")
+PASSWORD_RESET_ENABLED = DEBUG or bool(os.getenv("EMAIL_HOST") and os.getenv("DEFAULT_FROM_EMAIL"))
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
 GOOGLE_REDIRECT_URI = os.getenv(

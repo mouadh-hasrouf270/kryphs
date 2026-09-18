@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 
 from apps.accounts.views import MeView, PasswordResetConfirmView, PasswordResetView, SessionView
@@ -17,7 +17,9 @@ from apps.common.views import (
     readiness,
 )
 from apps.context_hub.evidence import EvidenceView
+from apps.requests_app.tasks import TasksView
 from apps.storage.google import callback
+from config.spa import index
 
 router = DefaultRouter()
 for route in DEFINITIONS:
@@ -25,6 +27,7 @@ for route in DEFINITIONS:
     router.register(route, cls, basename=route.replace("/", "-"))
 
 urlpatterns = [
+    path("api/v1/tasks/", TasksView.as_view()),
     path("admin/", admin.site.urls),
     path("api/v1/auth/session/", SessionView.as_view()),
     path("api/v1/auth/reset/", PasswordResetView.as_view()),
@@ -43,3 +46,6 @@ urlpatterns = [
     path("api/v1/", include(router.urls)),
 ]
 urlpatterns.insert(0, path("api/v1/google/callback/", callback))
+
+
+urlpatterns.append(re_path(r"^(?!api/|admin/|static/|assets/).*$", index))

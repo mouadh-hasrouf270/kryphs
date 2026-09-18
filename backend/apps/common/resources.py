@@ -4,6 +4,11 @@ from django.apps import apps
 
 # route: model label, write permission, read permission
 DEFINITIONS = {
+    "deliverable-assignments": (
+        "requests_app.RequestDeliverableAssignment",
+        "create_requests",
+        "view_creatives",
+    ),
     "brands": ("catalog.Brand", "manage_workspaces", "view_creatives"),
     "products": ("catalog.Product", "create_products", "view_creatives"),
     "campaigns": ("catalog.Campaign", "create_campaigns", "view_creatives"),
@@ -67,12 +72,14 @@ DEFINITIONS = {
     "jobs": ("common.Job", None, "manage_automations"),
 }
 READ_ONLY = set(
-    "versions feedback storage/objects storage/folders storage/uploads storage/syncs publishing publish-steps outcomes context-versions automation-runs automation-steps notifications activity audit jobs".split()
+    "files versions feedback storage/objects storage/folders storage/uploads storage/syncs publishing publish-steps outcomes context-versions automation-runs automation-steps notifications activity audit jobs".split()
 )
 APPEND_ONLY = set(
     "performance comments relationships source-usages clip-usages context-links".split()
 )
 HIDDEN = {
+    "submission_key",
+    "submission_hash",
     "credentials_encrypted",
     "session_encrypted",
     "local_path",
@@ -82,6 +89,10 @@ HIDDEN = {
     "receipt",
 }
 PROTECTED = {
+    "scopes",
+    "account_email",
+    "winner",
+    "resulting_creative",
     "id",
     "workspace",
     "created_at",
@@ -108,6 +119,9 @@ PROTECTED = {
     "metrics",
     "resolved_at",
     "external_id",
+    # Ordering is assigned by the backend for ordered child records.
+    # It must never be supplied by generic create/edit forms.
+    "sequence",
 }
 
 

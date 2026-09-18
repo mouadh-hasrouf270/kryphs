@@ -1,0 +1,12 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+exclude = [".venv", "**/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"manage.py" = ["E402"]
+"config/wsgi.py" = ["E402"]
+"tests/seed_drive_fixture.py" = ["E402"]

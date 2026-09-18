@@ -1,0 +1,60 @@
+services:
+  init:
+    image: creative-manager-backend:local
+    build:
+      context: .
+      dockerfile: ops/backend.Dockerfile
+    env_file: .env
+    environment:
+      DATABASE_PATH: /data/creative_manager.sqlite3
+      MEDIA_ROOT: /data/media
+    volumes:
+      - data:/data
+      - static:/app/staticfiles
+    command: sh -c "python manage.py migrate --noinput && python manage.py collectstatic --noinput"
+  web:
+    image: creative-manager-backend:local
+    env_file: .env
+    environment:
+      DATABASE_PATH: /data/creative_manager.sqlite3
+      MEDIA_ROOT: /data/media
+    volumes:
+      - data:/data
+      - static:/app/staticfiles
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; r=httpx.get('http://127.0.0.1:8000/api/v1/ready/',headers={'X-Forwarded-Proto':'https','Host':__import__('os').environ['DJANGO_ALLOWED_HOSTS'].split(',')[0]}); r.raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  worker:
+    image: creative-manager-backend:local
+    env_file: .env
+    environment:
+      DATABASE_PATH: /data/creative_manager.sqlite3
+      MEDIA_ROOT: /data/media
+    volumes:
+      - data:/data
+    command: python manage.py run_worker
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  nginx:
+    build:
+      context: .
+      dockerfile: ops/frontend.Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - static:/static:ro
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  data:
+  static:

@@ -1,0 +1,2699 @@
+[
+  {
+    "path": "Assets/css/cm-clip-analytics-v1.css",
+    "bytes": 1105,
+    "sha256": "6a6a18e4280cc45c82487178aa3c97997fc38e44a03990372ba26be7046f2ca3",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-components.css",
+    "bytes": 12697,
+    "sha256": "05ec30600dd0ec9e1eb6fc99e302ddb7906070d4cf9608271905856749b89b59",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-context-evidence-v1.css",
+    "bytes": 1544,
+    "sha256": "4bdeed973ae79ffe07e3da1b34600841a37eb24309ea97e0037612f20b9e7684",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-context-v1.css",
+    "bytes": 2773,
+    "sha256": "4761704250581947c81e7a597cb3b4339c0e323a28402b29217ed59c746e995f",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-evidence-assistant-v1.css",
+    "bytes": 2172,
+    "sha256": "6f1513be07138fa12a0c52ada9fbd6c464d4542a8326d96045ff56b539cb6803",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-family-match-v1.css",
+    "bytes": 1315,
+    "sha256": "3e71b5ac9a10ff5256428f35a79cd0261899c5660d4b16a17214a06aad990384",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-family-review-v1.css",
+    "bytes": 1710,
+    "sha256": "c60c589318a1e2c9ad4f17a919864109edca2c57dcbb79b213834630691cdef5",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-operations-v1.css",
+    "bytes": 699,
+    "sha256": "abbdf1615eb4d28ad37f97bb4574b73c9550d8b477aa7b0920dbccb77cb69402",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-patterns-v1.css",
+    "bytes": 2291,
+    "sha256": "3651386ab471da66a30c8ab3acea23edf33e02e123f46dcc56af66bd968ae786",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-phase3-v12.css",
+    "bytes": 14561,
+    "sha256": "9c66f255e1b0ce4ab31bbe29b35e3b2db02c87f7326ea5ea9511ceb05147ce05",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-phase3-v13.css",
+    "bytes": 14561,
+    "sha256": "9c66f255e1b0ce4ab31bbe29b35e3b2db02c87f7326ea5ea9511ceb05147ce05",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-phase3-v14.css",
+    "bytes": 14687,
+    "sha256": "3c16472b88d9f3d3fd12479bc744f13097aeb38f91dc2cb6988ff8f53096d6c5",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-product-ui-v6.css",
+    "bytes": 41394,
+    "sha256": "574deae66ed7d4771f55b6d9ae78ddc1a4bad85f5c7d96157b223f9015620ffd",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-proposals-v2.css",
+    "bytes": 1158,
+    "sha256": "3a73b0bb665ac972d565f4560ff580de5b65c19e278dfdfe82d0a180a3bb979c",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-sidebar-v7.css",
+    "bytes": 2780,
+    "sha256": "ce2c12742c69cb005120a7f8b890cf759846015c18bf716f1e2183047a624623",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/cm-tokens.css",
+    "bytes": 2944,
+    "sha256": "98de67b40fa117cf6c1f1feafd15094320c85292233fa01f5b010e76501b9148",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/css/module.css",
+    "bytes": 5247,
+    "sha256": "e65b08c42ab3ad3e9ca5ea70dfa8ba59ebb50c1fa70661bfbdc02d205540bfbf",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/images/logo.svg",
+    "bytes": 403,
+    "sha256": "0a8d86c6d1c71340a15866e251db5019f9205dac8315e667c423f90a2f8fa1c8",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/js/module-v5.js",
+    "bytes": 2195,
+    "sha256": "b8d7bc3984c9633a1bd58dd6edf854d8062616d6a6af7def2cc2e0f61bff58be",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/js/module-v6.js",
+    "bytes": 5747,
+    "sha256": "5d600475f624d92447b4937ff807f36af61b57c870b719b37a11e27a023b8529",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/js/module-v7.js",
+    "bytes": 5747,
+    "sha256": "5d600475f624d92447b4937ff807f36af61b57c870b719b37a11e27a023b8529",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Assets/js/module-v9.js",
+    "bytes": 7140,
+    "sha256": "80fb38a87985be2d118772a9919816d4af709eaaf89644eff27f0e5139df954f",
+    "functions": [
+      "syncFields"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Config/module.php",
+    "bytes": 363,
+    "sha256": "815c9aa4057f32ccda5f7c1080d7f640c8e2223acc253e78f69ef90d26192710",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/AdPlatformAdapterInterface.php",
+    "bytes": 399,
+    "sha256": "3f76ac05e1359ef5f0997ebb727b8d45c5d354478aa91a29a4b3e3b05e6ceeca",
+    "functions": [
+      "provider",
+      "health",
+      "fetchSnapshots"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/AIAnalysisProviderInterface.php",
+    "bytes": 1171,
+    "sha256": "7a857bdc60921b8125be4d6382c746040b2ad221ecdb27f86ad21a586c756480",
+    "functions": [
+      "slug",
+      "transcribe",
+      "extractOnScreenText"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/PublishingProviderInterface.php",
+    "bytes": 535,
+    "sha256": "d2088c1314cd1278f88364a111d11d11778dd5f85a80c64ddfaaa31ff91c7740",
+    "functions": [
+      "provider",
+      "publish"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/StorageChangeSet.php",
+    "bytes": 383,
+    "sha256": "7ca0d0e3c7426f217c84512bb2e22f6d9ba8a41ece4cdf170153f306ad459383",
+    "functions": [
+      "__construct"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/StorageItemValidationInterface.php",
+    "bytes": 190,
+    "sha256": "3a28bfa4f6fa90bbf3e88fdb1d18e8ff28fe9a13fd14d3e09c022c65bf0d0d1b",
+    "functions": [
+      "validateItem"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/StorageObjectMetadata.php",
+    "bytes": 634,
+    "sha256": "0122e308d9ab5f988c8b4d427c6a520388dde35398486471e9456b3574c1bcbd",
+    "functions": [
+      "__construct"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/StorageProviderInterface.php",
+    "bytes": 1748,
+    "sha256": "9665950799eaf6e6ec64d6c1308ef8adaf1a0e09f2ac84ef67790fda2151fbba",
+    "functions": [
+      "slug",
+      "validateConnection",
+      "listChanges",
+      "fetchMetadata",
+      "previewUrl",
+      "directLink"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/StorageValidationResult.php",
+    "bytes": 299,
+    "sha256": "7d9b3192b6b04c6994a9d399d4362efe32f270dc95a3dd3abaa5e5f31f0fc237",
+    "functions": [
+      "__construct"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Contracts/WorkspaceScopeInterface.php",
+    "bytes": 968,
+    "sha256": "2b74762d94ec626ad73e7534ce3ae910bfa8c9f2afc0d1107ce7f08051c11bcc",
+    "functions": [
+      "allowedBrandIds",
+      "currentAllowedBrandIds",
+      "canAccessBrand",
+      "workspaceIdsForUser"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Controllers/ActivityController.php",
+    "bytes": 1570,
+    "sha256": "c669871b443ecc091784ac753118d51e09cabb056cccd191016b32b1c9631f95",
+    "functions": [
+      "__construct",
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Contracts\\ActivityServiceInterface",
+      "App\\Core\\Contracts\\IdentityContextInterface"
+    ]
+  },
+  {
+    "path": "Controllers/AdConnectionController.php",
+    "bytes": 6325,
+    "sha256": "c9dddd9eadb6e2cb59fcc5cdb822304a3556f4d906f8db2eb96668a2757f4ea1",
+    "functions": [
+      "actor",
+      "redirect",
+      "error",
+      "index",
+      "save",
+      "scoped",
+      "test",
+      "disconnect",
+      "sync"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/AutomationController.php",
+    "bytes": 7335,
+    "sha256": "aa11874112488e9faf09e4eedb5028b5c90927311d3e72c22820691ce5c4baf8",
+    "functions": [
+      "actor",
+      "go",
+      "rule",
+      "index",
+      "store",
+      "addCondition",
+      "addAction",
+      "removeCondition",
+      "removeAction",
+      "toggle",
+      "retry"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/BoardController.php",
+    "bytes": 4431,
+    "sha256": "ff0fcad9b5f125104cfb119b6da2620782191bedc1e54ae6be14bc64a1e14591",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/CatalogController.php",
+    "bytes": 22920,
+    "sha256": "0a79bca9a2e3c3327edb0c21934cb1bcbd951d7ebb48c240724fa222013d3218",
+    "functions": [
+      "__construct",
+      "products",
+      "createBrand",
+      "createProduct",
+      "deleteProduct",
+      "createCampaign",
+      "deleteCampaign",
+      "createWorkspace",
+      "addWorkspaceMember",
+      "removeWorkspaceMember",
+      "restrictToBrand",
+      "removeBrandRestriction",
+      "workspaces"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/ContextHubController.php",
+    "bytes": 4001,
+    "sha256": "46557d75953dae8cf7c3bdc3877de4333977ffe9fedc7b4a6792c9ef66cceaca",
+    "functions": [
+      "index",
+      "show",
+      "store",
+      "revise",
+      "transition",
+      "redirect"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/CreativeProposalController.php",
+    "bytes": 614,
+    "sha256": "15c493cbf573d074ea14e0e63ffc5f5bcdaca00c4217dfbb53eae39adfe8e309",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/CreativeWorkspaceController.php",
+    "bytes": 35584,
+    "sha256": "d8c66d2d406dd8b4543d5b20a181b9a6aaa4767355e6001021ce2034a43f06b6",
+    "functions": [
+      "__construct",
+      "assertAccess",
+      "show",
+      "uploadGoogle",
+      "uploadYouTube",
+      "addFile",
+      "attachExisting",
+      "addClip",
+      "updateClip",
+      "addContentEntry",
+      "addComment",
+      "review",
+      "publish"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Models\\ActivityLog",
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/DashboardController.php",
+    "bytes": 19536,
+    "sha256": "0e48f5872338f3186e6d20ea8b5cbdbcfe52593cef6ac8776f9cdd118c9d3571",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/DecisionController.php",
+    "bytes": 1265,
+    "sha256": "c6a0c80dc1e6626aa256a14596eb0a01925a438e8f07dea8e5bb37b2d5f985ef",
+    "functions": [
+      "__construct",
+      "store"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/DeploymentController.php",
+    "bytes": 2396,
+    "sha256": "1d2b54f5752b8100048d3d6a0e5a9c0fee3f65f44644a5b7aa254debb9a45086",
+    "functions": [
+      "store",
+      "update"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/EvidenceAssistantController.php",
+    "bytes": 1343,
+    "sha256": "4cc2dc5acad75ed3aa9c4de8bd8fa95f6fc2520af578f7a9ff6bb170f69ce809",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/ExperimentController.php",
+    "bytes": 3391,
+    "sha256": "1008f3a19f3de2398ccd772b09c3c62a143480b5895036fc032f908b4e9e6e40",
+    "functions": [
+      "apply",
+      "update",
+      "state",
+      "bind",
+      "guard",
+      "store",
+      "addArm",
+      "complete"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/IntegrationsController.php",
+    "bytes": 10879,
+    "sha256": "697b7b7ea30aaf7c2b50b5098231440acb07c1643c8b1c0bde07119dd3bc69cf",
+    "functions": [
+      "index",
+      "detail",
+      "create",
+      "normalizeDriveFolderId",
+      "connectGoogle",
+      "googleCallback",
+      "sync",
+      "disconnect",
+      "delete"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/LibraryController.php",
+    "bytes": 3853,
+    "sha256": "4611f797f15ddb69eff9a6ad26f5131d4ea4067ff7ecb34f52865b59987dfa67",
+    "functions": [
+      "index",
+      "family",
+      "linkContext"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/LineageController.php",
+    "bytes": 6430,
+    "sha256": "680b5243e4e9c3033192a4aeb082036244d8f63e8e20176a669db934dcc346ab",
+    "functions": [
+      "__construct",
+      "show",
+      "collect",
+      "createRelated"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/MyTasksController.php",
+    "bytes": 4718,
+    "sha256": "44ed2532299acab09cc0d1d85ab16ddbd6f3576f5f957afbb188839652216e04",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/OperationsOverviewController.php",
+    "bytes": 625,
+    "sha256": "da7013b733e7c9edc38f6f32328181732cc32ec99432c232f7c27ecc5b7dd1a7",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/PatternController.php",
+    "bytes": 1218,
+    "sha256": "a3100b02c3fc00eeb6b794ff650ddd3f6af2994a352e45caece6abddf28120c8",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/PerformanceController.php",
+    "bytes": 1406,
+    "sha256": "4d4095eee43ebac64366cd88ca70f977cc9c1f0144d6b64bec717a4676d80b8d",
+    "functions": [
+      "store"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/PublishingController.php",
+    "bytes": 2382,
+    "sha256": "f12668a5d9a4b8053c8d5879cf5ec0f37dfba359322f93fc73e3274448fe231b",
+    "functions": [
+      "guard",
+      "service",
+      "back",
+      "code",
+      "store",
+      "retry"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/RequestController.php",
+    "bytes": 72547,
+    "sha256": "0b2e1fa8a31e0fa60aadfadc58a292901d1330c0e60d59569385e43ca17e1c36",
+    "functions": [
+      "__construct",
+      "assertRequestBrandAccess",
+      "assertCreativeBrandAccess",
+      "assertNestedCreative",
+      "index",
+      "create",
+      "store",
+      "show",
+      "edit",
+      "update",
+      "startProduction",
+      "createCreativeFromDeliverable",
+      "assignDeliverable",
+      "startProductionForCreative",
+      "outcomeForCreative",
+      "refreshForCreative",
+      "assign",
+      "linkedCreativeId",
+      "finish",
+      "finishForCreative",
+      "review",
+      "publish",
+      "outcome",
+      "addDeliverable",
+      "refresh"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Models\\ActivityLog",
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Controllers/SearchController.php",
+    "bytes": 6800,
+    "sha256": "49d40a2530ceca789d428af68d4f5cb1d82865508694211f7d1ebf2f525e44f4",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/SourceMaterialController.php",
+    "bytes": 4078,
+    "sha256": "8c9ac6741c5ee18419e410fe90c12915fc0be3edaf7e4c653f06daa4aaeab152",
+    "functions": [
+      "store",
+      "update",
+      "useForCreative"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Controllers/UtmController.php",
+    "bytes": 1174,
+    "sha256": "0e33d914c16dc9b9dd4f002e2c0f6678f3560754e10d0275a326e380220e3e73",
+    "functions": [
+      "index"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Exceptions/BrandAccessDeniedException.php",
+    "bytes": 643,
+    "sha256": "ff56cf80cb1a46bf4c19b9c43bc911ea1ce3b5b923912f74409e61a1805b1398",
+    "functions": [
+      "__construct"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/001_creative_manager_tables.php",
+    "bytes": 12101,
+    "sha256": "c0d6a3f56bfaa31d431c1c0122ca66712f2d724e1a1f84b62f5df4b263aa2113",
+    "functions": [],
+    "tables": [
+      "cm_brands",
+      "cm_campaigns",
+      "cm_creative_comments",
+      "cm_creative_feedback",
+      "cm_creative_performance",
+      "cm_creative_platforms",
+      "cm_creative_requests",
+      "cm_creative_tags",
+      "cm_creative_versions",
+      "cm_creatives",
+      "cm_inspiration_tags",
+      "cm_inspirations",
+      "cm_platforms",
+      "cm_products",
+      "cm_projects",
+      "cm_refresh_requests",
+      "cm_statuses",
+      "cm_tags"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/002_namespace_isolation.php",
+    "bytes": 408,
+    "sha256": "ac3708807db3de2f9a09bf872fd4c1780da304fc4b4ff399813f05a1d3d39241",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/003_workspaces_and_brand_scope.php",
+    "bytes": 4280,
+    "sha256": "e01afef09456566972fff516e462b83551a3f3b57c497ca80852561105e9f534",
+    "functions": [
+      "cm_column_exists",
+      "cm_table_exists"
+    ],
+    "tables": [
+      "cm_brand_users",
+      "cm_workspace_users",
+      "cm_workspaces"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/005_creative_relationships.php",
+    "bytes": 2774,
+    "sha256": "b818c5be1d1f2e5f46eb67c561c46197d960218318362e2c243057393fd7d325",
+    "functions": [],
+    "tables": [
+      "cm_creative_relationships"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/006_naming_and_taxonomy.php",
+    "bytes": 2742,
+    "sha256": "13908ea652d6ec041e7452a39f47adee249e7eaa55bb21db89a7e8203f46e8cc",
+    "functions": [],
+    "tables": [
+      "cm_attribute_values",
+      "cm_naming_templates",
+      "cm_taxonomies"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/007_boards.php",
+    "bytes": 3113,
+    "sha256": "c5b7e12e25cd8ceb5dfb659efd90247026f825b065b5da8a09d682ccb41a02cc",
+    "functions": [],
+    "tables": [
+      "cm_board_item_assignees",
+      "cm_board_items",
+      "cm_boards"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/008_workflow_and_integrity_hardening.php",
+    "bytes": 3235,
+    "sha256": "fcb965b76ac554347d6ff04a1cfe347e9a3a2a18044795cb89fff1941f8522e3",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/009_request_deliverables_and_creative_assignment.php",
+    "bytes": 4457,
+    "sha256": "252cbac2dcbaabfcb5a860ad07fccb8947241345bddea46c443aa761834715d4",
+    "functions": [],
+    "tables": [
+      "cm_request_deliverables"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/010_board_deliverable_evolution.php",
+    "bytes": 1282,
+    "sha256": "fdc875ad269d3be018311ce899559cb22969935fb53aaaeea9f4dcab724546ac",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/011_deliverable_sequence_integrity.php",
+    "bytes": 1653,
+    "sha256": "4d58817968b68169593f5c617c5e8516f5919038acd269df9deaac7972f5b680",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/012_storage_and_files.php",
+    "bytes": 5090,
+    "sha256": "095f090db5f55f0ee234ad138e9c6048f267912dde49aa1917678ecc201e8c01",
+    "functions": [],
+    "tables": [
+      "cm_creative_files",
+      "cm_storage_connections",
+      "cm_sync_runs"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/013_clips_and_content_index.php",
+    "bytes": 5506,
+    "sha256": "86e035e4a5ef14164d1044d6fdbc74d0b9bc19990c7075b8e4ce99b024ae0690",
+    "functions": [],
+    "tables": [
+      "cm_clip_usages",
+      "cm_clips",
+      "cm_content_index"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/014_storage_objects_split.php",
+    "bytes": 7588,
+    "sha256": "e20a573ac1161a377231e33512676bb3d685306bd98146a6d4f2fd70e1bc2479",
+    "functions": [],
+    "tables": [
+      "cm_storage_objects"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/015_storage_object_brand_ownership.php",
+    "bytes": 6164,
+    "sha256": "a6748cabf7617e204c77486d19577d0f7b985e2d7c547f7f220e778d2e6cc818",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/016_content_index_human_override.php",
+    "bytes": 1020,
+    "sha256": "b0b868d72fc4bcdc9aa639dd5516d4219701a14908f80296cf8dd9c1996ba660",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/017_storage_object_brand_repair.php",
+    "bytes": 6282,
+    "sha256": "ad78c640ffafd3ae72d59663928e7d3bbe9a4336f0d463192e4836af521fc926",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/018_sync_auditability.php",
+    "bytes": 917,
+    "sha256": "c6b6a36a9e6c42b1308690dc34d897b1eb77fb7823f5c46e0d735d21074c4f57",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/019_phase2_integrity_and_source_materials.php",
+    "bytes": 6349,
+    "sha256": "b8cfceccdcace09c199bcc8136736f972a4ce9e0e11b863e1132f1ef038159d6",
+    "functions": [],
+    "tables": [
+      "cm_request_source_materials",
+      "cm_source_material_usages"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/020_phase2_round11_recovery.php",
+    "bytes": 3740,
+    "sha256": "de3310f81335e38eb6e9fffa343debc2a1ece3c5cabb88a18f1458e8e90b25e0",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/021_remove_concepts_and_briefs.php",
+    "bytes": 2115,
+    "sha256": "fb0d4a7b6931a9aa04a4f1b35460b3e2fdd11e1e8b96f0e84a1e00cb9d37b4d1",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/022_phase3_deployments_performance_experiments.php",
+    "bytes": 10868,
+    "sha256": "ef8f0da5bffd50d634b1eff554b469e4270be91ad49e9c4759956d27c6dd80d0",
+    "functions": [],
+    "tables": [
+      "cm_deployments",
+      "cm_experiment_arms",
+      "cm_experiments",
+      "cm_outcome_history",
+      "cm_performance_snapshots"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/023_ad_connections.php",
+    "bytes": 1760,
+    "sha256": "7c5f517428ac589768e509269228a9825862493bbc73be052ef424f6642d1e08",
+    "functions": [],
+    "tables": [
+      "cm_ad_connections",
+      "cm_ad_sync_runs"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/024_phase3_integrity.php",
+    "bytes": 2272,
+    "sha256": "410058360db03e9ef6c65ba6330951ac8a35e592a0e2f064fa07a775668df702",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/025_phase3_deployment_identity.php",
+    "bytes": 794,
+    "sha256": "c4bfc21a49327fdf76767f202ea7af8cd72f7d763ddf2768c62209a9fc1b5c6d",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/026_automation_engine.php",
+    "bytes": 2909,
+    "sha256": "b8c67f76309d8d6b068397720843c68dcd16aba03c1af52ad07c252e3315fd7a",
+    "functions": [],
+    "tables": [
+      "cm_automation_actions",
+      "cm_automation_conditions",
+      "cm_automation_rules",
+      "cm_automation_run_steps",
+      "cm_automation_runs"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/027_safe_publishing.php",
+    "bytes": 2824,
+    "sha256": "5ca0ff3c513dacdf2d390807419adef0bc0f12e45efc67ea9bcad66d33c29ede",
+    "functions": [],
+    "tables": [
+      "cm_publish_jobs",
+      "cm_publish_steps"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/028_automation_context_recovery.php",
+    "bytes": 389,
+    "sha256": "742b62358640826184dd5acb6cd79b094059221377bf8092f6792998de304d49",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/029_google_drive_oauth.php",
+    "bytes": 353,
+    "sha256": "e907371d9297aa2dc198277cb31ce4d3cd9d1bb470c2e710e8bd10108479869b",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/030_orphan_workspace_recovery.php",
+    "bytes": 954,
+    "sha256": "7fa5b71cdd6c42e5bdc930bbcd33602759a4fe0d1a26d87caa53d087b66a4986",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/031_context_hub.php",
+    "bytes": 2044,
+    "sha256": "d24768f7fee099ccae39fc83985ec205817e126c85b0b84e006c44ef91d332c9",
+    "functions": [],
+    "tables": [
+      "cm_context_document_versions",
+      "cm_context_documents"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/032_context_creative_evidence.php",
+    "bytes": 2435,
+    "sha256": "919687ff7d2e11600c7dad6d7e912b2da811d61e401bef5288b6de6bc7571522",
+    "functions": [],
+    "tables": [
+      "cm_context_creative_links"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/033_drive_upload_attempts.php",
+    "bytes": 1107,
+    "sha256": "ff149e1655ab64aeddf40bf92855488a32c3bd965410cd83035a2cc0937bcc8d",
+    "functions": [],
+    "tables": [
+      "cm_drive_upload_attempts"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/034_drive_upload_attempt_integrity.php",
+    "bytes": 3369,
+    "sha256": "45aafaf0d175894055dd3d78638f8591492bc5bebf432d668767f569100540c2",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/035_publish_receipt_integrity.php",
+    "bytes": 2063,
+    "sha256": "efa9e3d4d4651d20562a8da30995614dfbc7a5e6751225eb2f9b4ef221b12d2d",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Migrations/036_youtube_resumable_uploads.php",
+    "bytes": 3483,
+    "sha256": "0c1360bdf0a42a12ff272339e4953c04823080a5bd80a3bef28f05a321f0a0e0",
+    "functions": [],
+    "tables": [
+      "cm_youtube_uploads"
+    ],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/Clip.php",
+    "bytes": 1325,
+    "sha256": "978ec9dae48eefbec3a44eff9422389e90c14fd016322a9d8c3caf35b7f9ab38",
+    "functions": [
+      "forVersion",
+      "isVisibleToBrands"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/ClipUsage.php",
+    "bytes": 1541,
+    "sha256": "90b439ba7737e7731e2aec697b0bce63b7ffc974d468d9dce23f92f35bba8b6c",
+    "functions": [
+      "recordUsage",
+      "creativesForClip",
+      "clipsForCreative"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/ContentIndexEntry.php",
+    "bytes": 4005,
+    "sha256": "f07a03d4f51b5d7ec4a7c2b5d3b76265f8936b18e134e89d638df157caf98e7b",
+    "functions": [
+      "forVersion",
+      "authoritativeForVersion",
+      "search"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/Creative.php",
+    "bytes": 16887,
+    "sha256": "62d2bb0c8671f94607c00c9cc056333a6253745bba779e2ba43c2d076d81d2ed",
+    "functions": [
+      "nextPublicCode",
+      "createWithNextCode",
+      "authoritativeEditor",
+      "updateName",
+      "forRequest",
+      "paginatedSearch",
+      "detail",
+      "isVisibleToBrands",
+      "findByPublicCode",
+      "detailForCreative",
+      "detailForRequest"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/CreativeComment.php",
+    "bytes": 1321,
+    "sha256": "a20e0912ffaabd37f271c4754899433a621d363028a2f7ee8bcf83eaa7128340",
+    "functions": [
+      "forVersion",
+      "create"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/CreativeFeedback.php",
+    "bytes": 597,
+    "sha256": "bf97fc6b2490e78b153016c2a6a3c5d1c35241942594583d391c7312a5d71325",
+    "functions": [
+      "forVersion"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/CreativeFile.php",
+    "bytes": 2400,
+    "sha256": "0543017964a83b40e58926634ef6180dd3cb996fb454fe7d894f6c0dcb9ef2fc",
+    "functions": [
+      "forVersion",
+      "isVisibleToBrands"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/CreativeRelationship.php",
+    "bytes": 2786,
+    "sha256": "e30169892c9316628208f371e433b61c9b74edbd8d48639d0a3311f99a8340bc",
+    "functions": [
+      "children",
+      "parent",
+      "ancestorIds"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/CreativeRequest.php",
+    "bytes": 11501,
+    "sha256": "98f3b97d0d4584779791e2d42350146aaf92605c1d9ecd723ba914701de32b53",
+    "functions": [
+      "paginatedSearch",
+      "detail",
+      "linkedCreative",
+      "requestedDeliverables",
+      "deliveryStateOf",
+      "deliverableProgress",
+      "recomputeAggregateStatus"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Models/CreativeVersion.php",
+    "bytes": 3362,
+    "sha256": "be45585d9d8a20ce381e6c04fb294d289e8791206db3f06fd328d2d8fb8a9439",
+    "functions": [
+      "nextVersionNumber",
+      "labelFor",
+      "forCreative",
+      "detail",
+      "belongsToCreative"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/Deployment.php",
+    "bytes": 7462,
+    "sha256": "6152adf4c75de29618cc671ec83b8b5de49867a9204ddabae7e2b65659eac8eb",
+    "functions": [
+      "forCreative",
+      "create",
+      "update",
+      "validated"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Models/Experiment.php",
+    "bytes": 10949,
+    "sha256": "1becb6086d1a08dd3bd0cb863835be046fe8943097bc6984c56d49197b80d459",
+    "functions": [
+      "forCreative",
+      "context",
+      "deployment",
+      "fields",
+      "createWithCreative",
+      "update",
+      "addArm",
+      "bindArm",
+      "transition",
+      "complete",
+      "arms"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Models/Lookup.php",
+    "bytes": 3811,
+    "sha256": "14a7f63e5aae365aadea2aa02d397017e132dd026a47a1352c2e1fcff72d38a5",
+    "functions": [
+      "products",
+      "productsForBrands",
+      "campaignsForBrands",
+      "brandsForIds",
+      "platforms",
+      "statuses",
+      "editors",
+      "editorsForBrands",
+      "requesters",
+      "requestersForBrands",
+      "workspaceIdsForBrands",
+      "campaigns"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/OutcomeHistory.php",
+    "bytes": 441,
+    "sha256": "6c484d39531dc91fc3c46963df7c4f6e9c855590d80b3c168999e69f88a08f0c",
+    "functions": [
+      "forCreative"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Models/PerformanceSnapshot.php",
+    "bytes": 5424,
+    "sha256": "7f9d933623b45593d6d0499af0248f2446a70ea8cbc05e8a022dc105a8140343",
+    "functions": [
+      "canonical",
+      "forCreative",
+      "summaryForCreative",
+      "leaderboard",
+      "create"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Models/RequestDeliverable.php",
+    "bytes": 3952,
+    "sha256": "2cc421ec3b32b0ddce2d711049ca6b344d0a0455257348f494bab35d28b5b741",
+    "functions": [
+      "forRequest",
+      "createPlanned",
+      "find",
+      "markCreated",
+      "counts"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/SourceMaterial.php",
+    "bytes": 1875,
+    "sha256": "4136d35032fd7d17e9100bd6373a0f1a00280f21cc8d39775dcca30fc96d4e1d",
+    "functions": [
+      "forRequest",
+      "find",
+      "visibleUsages",
+      "isUsedByCreative"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/StorageConnection.php",
+    "bytes": 1414,
+    "sha256": "fba521e08a2c10d9be2067697aa3daaddbf76f3fe84b796df6fcaa0c2254eccb",
+    "functions": [
+      "forBrands",
+      "detailScoped"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/StorageObject.php",
+    "bytes": 6540,
+    "sha256": "62f3709f33624a8e98b5dfe8b80bea302749803fc7a6d7992539942ed6e24b34",
+    "functions": [
+      "findByConnectionAndProviderId",
+      "findByChecksumInBrand",
+      "findByCanonicalUriInBrand",
+      "normalizeUri",
+      "attachmentsVisibleToBrands",
+      "forConnection",
+      "availableForBrand",
+      "isVisibleToBrands"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Models/SyncRun.php",
+    "bytes": 470,
+    "sha256": "52c6f661278097fce924d8217dd0ddbff9a79f30dc9f4eac411b43544b598efa",
+    "functions": [
+      "forConnection"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Module.php",
+    "bytes": 11033,
+    "sha256": "997b2364d737646eef99a0ef8b61400943e41f0bde4de32c345026d17d6920c5",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "NAVIGATION-DESIGN.md",
+    "bytes": 1553,
+    "sha256": "9a08e042f2cc56711499e092d089ffed7f09a7d1113ab6f022f9024ea7f33a16",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Permissions/creative.permissions.php",
+    "bytes": 2784,
+    "sha256": "f2e647070877d3c200cf73ce296969538b4107e7620e25051d19242685a2e45e",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "PHASE3-DELIVERY.md",
+    "bytes": 10749,
+    "sha256": "b4057889b5b6bda5e4288b32fe91c71433a4a9d02716952cb1224e6a63862b0d",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Policies/CreativeMutationPolicy.php",
+    "bytes": 2276,
+    "sha256": "d8317b6c9828ea38144ccd301ee20dc46cbe9e64fabe2a8216b3c2bdf014b5e3",
+    "functions": [
+      "canMutate",
+      "canViewInventory",
+      "assertCanMutate",
+      "userCan"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Policies/RequestPolicy.php",
+    "bytes": 3554,
+    "sha256": "5181c750c72cfa3add9bf669ae14a66d22b6403c2f32aea3d2e419d4dd493aa1",
+    "functions": [
+      "row",
+      "canView",
+      "canMutate",
+      "userCan"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Policies/SourceMaterialPolicy.php",
+    "bytes": 1116,
+    "sha256": "ae2871d4ec8e627f77c0e2a6daa24b2daa4c5a75f9b10a55a14eb957ba02911c",
+    "functions": [
+      "canManageRequest",
+      "canUpdate",
+      "canViewRequest"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Policies/SourceMaterialStoragePolicy.php",
+    "bytes": 1891,
+    "sha256": "aa02e5764b4ce23995d8107c6d2d2ff44b394bd4c1bca8198cee58f6bcf54be5",
+    "functions": [
+      "canBrowseStorageInventory",
+      "canAttachExistingStorageObject",
+      "userCan"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Providers/CreativeManagerServiceProvider.php",
+    "bytes": 502,
+    "sha256": "8be047438a229a940191d00807f7e880eab082c452c96df7a6a739dfc0f0d981",
+    "functions": [
+      "register"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Container\\Container",
+      "App\\Core\\Modules\\AbstractModuleServiceProvider"
+    ]
+  },
+  {
+    "path": "Resources/lang/ar/messages.php",
+    "bytes": 100206,
+    "sha256": "aa7fd686ca426ffe89eede3959aa923ddd34b024198394f91f8943892833b767",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/lang/en/messages.php",
+    "bytes": 79307,
+    "sha256": "512db22499b6e7313afc373b2b8eb504eef1d3a9b2dc7f43c3fcae084e8be69a",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/lang/fr/messages.php",
+    "bytes": 86023,
+    "sha256": "60ee746cfbd08934483af1470cc8243abfe899729444c03b3fcc0939eb058c23",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/activity/index.php",
+    "bytes": 1035,
+    "sha256": "7f45347f44ceada876130c5ba9e79dc7478be8127417a0d7c97df174101629c1",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/admin/products.php",
+    "bytes": 8085,
+    "sha256": "8f930c0145951f89bce44cf31dfa3ed42ee95a004a8dec29ef9bf1e65bdb8443",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/admin/workspaces.php",
+    "bytes": 6622,
+    "sha256": "9a60896e6a1321eade41e0384766a9852968cd2fd5bcadf0462ee79cdcf37a61",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/automations/index.php",
+    "bytes": 5716,
+    "sha256": "1f8cc3d5db28095daa6ef1acc4ff9a2e9c10752b9726b3b5ae605586365d38ca",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/board/index.php",
+    "bytes": 3700,
+    "sha256": "865bc4bd8248bad378cc56d7d0f5eadc9009cd629357be5169c13b8d8362c1c9",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/context/index.php",
+    "bytes": 4788,
+    "sha256": "1100d3e2b24d471b9f2f5dd0d324a7f84c088656ffd0ef2f8585a1e8c8379102",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/context/show.php",
+    "bytes": 3372,
+    "sha256": "8500f0774a15d7bab9179be306623175428f165ca1b252bf8cd460b24fe6af31",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/decision.php",
+    "bytes": 1166,
+    "sha256": "b2b3f7cbdbea49578804ad8ba1052b98bbb8530271d6da127b6657f13919e67f",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/deployment_edit_form.php",
+    "bytes": 4438,
+    "sha256": "2bd1daf7be20f943241d283a6ca50111746470b529914c5691d1af03496cc393",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/experiment_form.php",
+    "bytes": 2464,
+    "sha256": "a2d3796a41643933756239d0d449f17878e9028bcb46d6e4c9725c73eaa544be",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/experiments.php",
+    "bytes": 6404,
+    "sha256": "a6cd6bac43160fc49f7856f68b267a72df39f84fa9d87f3f3349b00f30e0b1b4",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/performance_history.php",
+    "bytes": 2015,
+    "sha256": "89de16b4479c9e05f18878d8a54b1674c95c41f2d57d2898e2edeac90eb7b5bb",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/creatives/workspace.php",
+    "bytes": 66288,
+    "sha256": "da90880dfef6b16ab2a6d74fb8e08808e9c96aced7aed797f2ac6152b0a02205",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/admin.php",
+    "bytes": 1624,
+    "sha256": "30552a7ef4f3b097800cc7ee90ae3c39cf735d6c48bbd9d1e1cb38e6d004ecc0",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/editor.php",
+    "bytes": 2847,
+    "sha256": "5ac2a7a85942803773b31aa5f28609d4222c572e8f0cf6927a7fdd936d3f0cd8",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/manager.php",
+    "bytes": 1894,
+    "sha256": "8eac109a1bd059f49c52c3ea266f912ad743a672c69d62854cf18915467e84ed",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/media_buyer.php",
+    "bytes": 4160,
+    "sha256": "c1da03e7cba30002083ee76cdb43508fd918541e4da803aadc4ee5a1c976f8c3",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/requester.php",
+    "bytes": 1515,
+    "sha256": "f84a62c9c6aee2b60c32dbf23d47bf22d8f5011608dfd4a8b7a517af930317f8",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/dashboards/viewer.php",
+    "bytes": 367,
+    "sha256": "50517f8068a50a5bc333f3f03d31b0d1c526b778683fd97fc186b1b584a0414f",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/editor/my_tasks.php",
+    "bytes": 3297,
+    "sha256": "7ba25509ba4c81830cf4df747f4fe42e407bab6a1b15f5b7c558381d19a938d2",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/home/index.php",
+    "bytes": 14964,
+    "sha256": "9b1b7aa55b334daf018bc105b5a282ba8a0acf6815d4d035d347a3d60b19a658",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/integrations/ads.php",
+    "bytes": 3233,
+    "sha256": "a3b43da6e41d27e08e396e63cf1a20bc978771c5f6afceb7d23ce38cf1e1208d",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/integrations/detail.php",
+    "bytes": 4707,
+    "sha256": "490783aafd12e5992a952cc84109fa7ec930405b2cfffb3e1c4bdc0f677d589c",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/integrations/index.php",
+    "bytes": 7772,
+    "sha256": "cfe3b52bc3dc00fa9624029412924a8777caae08f0cfc13b231d46f50bce7ff5",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Resources/views/library/evidence_assistant.php",
+    "bytes": 12939,
+    "sha256": "6cace40f842b51c8390f89636eeb07d67ea25ce1241dd7993a813f39f88de93a",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/library/family.php",
+    "bytes": 26531,
+    "sha256": "17a123f1fdbf646619e7cf95f1ef037b4c19177992f21eabaefa50702844f57c",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/library/index.php",
+    "bytes": 7139,
+    "sha256": "0eaa9d69ff6a1d2e252b59bd70cbeeceb8af0e49ac612446d14ab148bea7c526",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/library/patterns.php",
+    "bytes": 6765,
+    "sha256": "027594e9016ebdbffe2ed9f7c2780ca46b9d30b3c82a89d946309aeacec1478b",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/library/proposals.php",
+    "bytes": 3012,
+    "sha256": "55ba4c99b0e5bdf7c027bf607775c59af255cd9308851085369f3635c2be99b7",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/lineage/show.php",
+    "bytes": 14861,
+    "sha256": "af9481b2f36cb70bfa58c2832d19a6adfe7ed37b9ede67ce8e5008c1cd3921c2",
+    "functions": [
+      "applyViewBox",
+      "zoom",
+      "selectNode"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/operations/index.php",
+    "bytes": 1522,
+    "sha256": "ffd50a78d65688bbfd9642bf4b47e3671b0e32d6835f6365bc98d169beb3f128",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/partials/activity_feed.php",
+    "bytes": 925,
+    "sha256": "165f125a555e25627663e34cc794db67738301c4595a26e1cd32f0135948f0ee",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/partials/kpi_cards.php",
+    "bytes": 1752,
+    "sha256": "873dd5f0468c3ad0510d6ece1c095bc49e3d8e37934fe7d8550095d22c779792",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/partials/lifecycle_rail.php",
+    "bytes": 932,
+    "sha256": "7b2db175a7a313475cf9c84c5b4b2748b2877f1509859a54b2075725dfe6ee69",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/partials/request_lifecycle_rail.php",
+    "bytes": 2285,
+    "sha256": "c34e50b997483c66736439000df6f7f6ecc08d0b10c44551bd82415b91e738a8",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/requests/create.php",
+    "bytes": 8620,
+    "sha256": "5ae81d209c6720c74890de74e75f4558b6756ed817cc765f88157ff59897b671",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/requests/edit.php",
+    "bytes": 6491,
+    "sha256": "cc87956979c07361266406255f2296a2bc29e63665ce5fbc47321389e1628092",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/requests/index.php",
+    "bytes": 5563,
+    "sha256": "6d15e83986be04495545f78976ea3e5834af117bb7267f0b99b057a980f0aa1c",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/requests/show.php",
+    "bytes": 5273,
+    "sha256": "94274627839721f90c4f07460bb9314d905884e0943e7639e69ee052fe62542c",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/requests/workspace.php",
+    "bytes": 22800,
+    "sha256": "a8b40075d59fb1a62cc863440842f4950eb3e0dcd83584897910ad3b0ca8c80d",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService"
+    ]
+  },
+  {
+    "path": "Resources/views/search/index.php",
+    "bytes": 13948,
+    "sha256": "8b1869dc5d08f1d43309c72c65f805b49dd757603241fe4626a2de7f1e8971af",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Resources/views/utm/index.php",
+    "bytes": 13439,
+    "sha256": "3d3f66da285a0785262151b6adddfc415f23822443f8503fdb5624b5a18d875f",
+    "functions": [
+      "slugify",
+      "applyPreset",
+      "buildUrl",
+      "loadHistory",
+      "saveHistory",
+      "addToHistory",
+      "escapeHtml",
+      "renderHistory",
+      "copyToClipboard"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Routes/creative.routes.php",
+    "bytes": 18133,
+    "sha256": "7c324ad4439f9407d80fcef22029df35dc0071237d0676121f30dcb3940a5e51",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Seeders/001_reference_data.php",
+    "bytes": 5912,
+    "sha256": "c44330f2ba366184bae5d7737b50c8282bd01a30df8ce4ff08c03657d27c095b",
+    "functions": [],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/AdCredentials.php",
+    "bytes": 1327,
+    "sha256": "20255a0f276aa90028e55d2441b3d45e78c5e9f8ad134e72aa97780c654cae86",
+    "functions": [
+      "key",
+      "seal",
+      "open"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/AdHttpClient.php",
+    "bytes": 2372,
+    "sha256": "48afb8b94a07b4ee2153099b88d07100a6c1b49bebe4784afe1d9010ffecda4f",
+    "functions": [
+      "request"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/AdPlatformAdapterRegistry.php",
+    "bytes": 579,
+    "sha256": "b0d3da8d19dd7359a2c050bcad5b6e3de99f47e5b3276a5ac97aa314423f444a",
+    "functions": [
+      "register",
+      "get",
+      "providers"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/AdSyncService.php",
+    "bytes": 4648,
+    "sha256": "2baff8b762db954764b1f50079582da71d8e638901749809c1c5bad71d84538d",
+    "functions": [
+      "context",
+      "adapter",
+      "run"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/Ads/DeterministicAdAdapter.php",
+    "bytes": 972,
+    "sha256": "5df37c0036bb861238f3c3499862677f7435fb4800ecc0891ed78d19699e3225",
+    "functions": [
+      "__construct",
+      "provider",
+      "health",
+      "fetchSnapshots"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/LiveAdAdapter.php",
+    "bytes": 10369,
+    "sha256": "871cfbe0c8f5763ecfbd46e4abd39f4d6efe3c3ebde3b663f04f0cfac2141ac6",
+    "functions": [
+      "__construct",
+      "provider",
+      "numericId",
+      "version",
+      "googleHeaders",
+      "health",
+      "fetchSnapshots",
+      "meta",
+      "tiktok",
+      "google"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Ads/MetaPublishingProvider.php",
+    "bytes": 3435,
+    "sha256": "dffd2058b628f1df611f85fb1984289a4efcbd39b4b1f10cb733cbbaa023283a",
+    "functions": [
+      "__construct",
+      "provider",
+      "publish",
+      "numeric",
+      "id"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/AuthoritativeEditorResolver.php",
+    "bytes": 497,
+    "sha256": "cf9c2574c6f78b45bbfb98d3b2f15712da7c45b68ef636ec63570f9e6c2baba7",
+    "functions": [
+      "forCreative"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/AutomationEngine.php",
+    "bytes": 9758,
+    "sha256": "25c6b39e8ba5103a556526a88462ee37ede602925a34e8d044599331ac49c6b1",
+    "functions": [
+      "dispatch",
+      "dispatchCreative",
+      "dispatchDeployment",
+      "dispatchRequest",
+      "dispatchSourceMaterial",
+      "run",
+      "retry",
+      "matches",
+      "action",
+      "step"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ClipAnalyticsService.php",
+    "bytes": 5453,
+    "sha256": "b1afc574debda78b5bd6f47c4584d1dbd49431c1341113aadeb86eba77178e34",
+    "functions": [
+      "forFamily"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ClipService.php",
+    "bytes": 6949,
+    "sha256": "e4c4537966b0ec968eec636ba672a41065a24831078d9a0f51e22ffd85baba42",
+    "functions": [
+      "validateRange",
+      "validateFields",
+      "create",
+      "update",
+      "creativesForClipScoped",
+      "recordUsage"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ContentIndexService.php",
+    "bytes": 11734,
+    "sha256": "60bf407f34db289959f64f11abf1bab707f399a8e7c9b748e46aa2c41ce695d0",
+    "functions": [
+      "assertConsistent",
+      "assertValidKind",
+      "assertValidRange",
+      "assertActorCanAccessVersion",
+      "addManualEntry",
+      "addMachineEntry",
+      "humanEntryExistsForSegment",
+      "supersedeAllEntriesForSegment"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ContextEvidenceService.php",
+    "bytes": 3864,
+    "sha256": "ad7969d2972e994edd5fe4eb12f6256353d6e7cd08d248c7a4964dec44eb8061",
+    "functions": [
+      "forFamily",
+      "candidates",
+      "link"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ContextHubService.php",
+    "bytes": 7491,
+    "sha256": "31516b3f677e62061f9e729c4a51209af5d77b5f43b0e6b39aa8368966739bf5",
+    "functions": [
+      "list",
+      "detail",
+      "create",
+      "revise",
+      "transition",
+      "requireBrand",
+      "clean"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/CreativeActivity.php",
+    "bytes": 3062,
+    "sha256": "8b4cb09918c5f818b963f497a74688008e8dd54146a432d206fd9ed3284e2ea7",
+    "functions": [
+      "__construct",
+      "log",
+      "filterToAllowedBrands"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Contracts\\ActivityServiceInterface"
+    ]
+  },
+  {
+    "path": "Services/CreativeFamilyMatchService.php",
+    "bytes": 8428,
+    "sha256": "ece1e728314595b2880f5d6170516b7c26c404c3d3b62a16c42aece8159c3168",
+    "functions": [
+      "explain"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/CreativeFamilyService.php",
+    "bytes": 19329,
+    "sha256": "e1bb71734f1575157ba71b9de1c32a2f2e1a4dbb86c89c6a62696ff975165ded",
+    "functions": [
+      "search",
+      "detail",
+      "visibleCreatives",
+      "relations",
+      "maps",
+      "rootOf",
+      "descendants",
+      "matches",
+      "extraKeywordMatches",
+      "countByCreative",
+      "clipCounts",
+      "emptyPage"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/CreativeNotifier.php",
+    "bytes": 11533,
+    "sha256": "2c2c7687a9ed7c1fc8492d741f17a4de421dd8f4bca4204f9d2003bdebef639a",
+    "functions": [
+      "__construct",
+      "notifyRequestTransition",
+      "notifyCreativeTransition",
+      "notifyCreativeOutcome",
+      "notifyDeliverableAssigned",
+      "notifyRequestCreated",
+      "notifyNewUnassigned",
+      "resolveCreativeContext",
+      "brandScopedRecipients",
+      "workspaceIdForBrand",
+      "uniqueRecipients"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Contracts\\NotificationPublisherInterface",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/CreativeProposalService.php",
+    "bytes": 2968,
+    "sha256": "57dcb7f1d745cfc9e2d04d685ea4bf2c28ea843b0698e004d0a93d16b3812c6d",
+    "functions": [
+      "review"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/CreativeUserDirectory.php",
+    "bytes": 6353,
+    "sha256": "ff410bf6bb944061b0d3721aa830d233f4533fe5c8b335f4176b6f7d24ab00ef",
+    "functions": [
+      "currentRole",
+      "dashboardRole",
+      "currentHasRole",
+      "userHasRole",
+      "hasModuleAccess",
+      "isEligibleResponsibleForBrand",
+      "responsibleUsersForBrands",
+      "usersByRoles",
+      "userIdsByRoles",
+      "usersByRolesInWorkspaces",
+      "isAssignableEditorForBrand"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/EvidenceAssistantService.php",
+    "bytes": 10768,
+    "sha256": "4a51e8de52c87dab43780616e3707b0607dad14bf7da73c1c3df1a4e370a2e3f",
+    "functions": [
+      "answer",
+      "family",
+      "fatigue",
+      "clips",
+      "hooks",
+      "experiment",
+      "parentChild",
+      "result"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/FamilyRefreshSearchService.php",
+    "bytes": 994,
+    "sha256": "6f0844e914a38afbede26b7c4b2f41270bcc94b90a4c805643461d581394bbcd",
+    "functions": [
+      "creativeIds"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/FamilyReviewSearchService.php",
+    "bytes": 1135,
+    "sha256": "8108738c9124a5f4c446b0bb5dd125f574d55881c11a702e6553c218291c8fae",
+    "functions": [
+      "creativeIds"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/FatigueSignalService.php",
+    "bytes": 2248,
+    "sha256": "444151b1740070b5f3f305e5f6ab06cbcfe19f2564217987d03e5f402b62934d",
+    "functions": [
+      "forCreative"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/FileIdentityService.php",
+    "bytes": 17124,
+    "sha256": "dabf37469f3b7ff84e7ffacacba70913aca6cad5b76a7b4303341291dfba7c89",
+    "functions": [
+      "resolveAndAttach",
+      "authoritativeBrandForVersion",
+      "assertConnectionBrandAgreement",
+      "assertValidRole",
+      "resolveObject",
+      "updateObjectMetadata",
+      "attachObjectToVersion",
+      "indexObject",
+      "attachByUrl",
+      "attachExistingObject"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/LineageService.php",
+    "bytes": 8461,
+    "sha256": "47a060764e216bc20119ff1358fecb60a5b2ba07131864306dc20b08db9591bc",
+    "functions": [
+      "createRelatedCreative",
+      "linkExistingCreatives",
+      "insertEdge",
+      "assertValidType",
+      "productBrand",
+      "assertSameProductBrand",
+      "descendantIds"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/MediaAnalysisService.php",
+    "bytes": 4474,
+    "sha256": "5441cf2c1d3df95fec6bb8f59676d7b07851d5d6ce3410d537f42b5053731eb0",
+    "functions": [
+      "analyze"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/MediaResolutionService.php",
+    "bytes": 11867,
+    "sha256": "2909173136aac2386d4a6be32a698627a120c0c0dbd92fb47178754cbcfaa094",
+    "functions": [
+      "resolveVideo",
+      "resolveThumbnail",
+      "resolveOpenLink",
+      "bestAttachment",
+      "isKnownNonVideo",
+      "isDirectlyPlayableVideo",
+      "playableResult",
+      "safeUrl",
+      "tryProviderUrl",
+      "legacyVersionRow"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/NamingTemplateService.php",
+    "bytes": 2429,
+    "sha256": "50de8f67b9daa2f28383a7eb2c60115d989ceb558775c5f8320c461f36bed7fe",
+    "functions": [
+      "renderForVersion"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/OperationsOverviewService.php",
+    "bytes": 2686,
+    "sha256": "bc96bcc9494c1414c032a18a03b75772a512cc99ee5048cff4cad1a8b4ec8388",
+    "functions": [
+      "recent"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/ParentChildEvidenceService.php",
+    "bytes": 3774,
+    "sha256": "a188f4e8f9a9259837e01554d9a88e720b65e001e5b7acba6c28a196a4f36953",
+    "functions": [
+      "compare"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/PatternAnalysisService.php",
+    "bytes": 6064,
+    "sha256": "c33e2ad837d159d51604064fa97f1ed8328dd03277fe5a76ca1e2a6b56a29ccc",
+    "functions": [
+      "overview",
+      "cohorts",
+      "empty"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/PerformanceAnalysis.php",
+    "bytes": 2059,
+    "sha256": "4d6ce6d3acc10e47faa4e96f2d62f995fe987294bf082590641ff57c305e5474",
+    "functions": [
+      "compatible",
+      "metrics",
+      "summary"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/PerformanceComparisonService.php",
+    "bytes": 1560,
+    "sha256": "118425ed7b894420fd2f5cb9830087d3a3649fdea6880bf54b761c6b4e18825f",
+    "functions": [
+      "parentComparison"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/PublishingAssetResolver.php",
+    "bytes": 1414,
+    "sha256": "8eab6f093591f5832ec684328dd77be190f265e18a7d1ce2077601015bc65eca",
+    "functions": [
+      "remoteUrl",
+      "https"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/PublishingService.php",
+    "bytes": 9375,
+    "sha256": "583591400d03f015ce6f8489dfdd4eb83f8513764df4afb49f18b10b319b944e",
+    "functions": [
+      "__construct",
+      "queue",
+      "execute",
+      "provider",
+      "errorCode",
+      "destination",
+      "record"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/PublishingStepRecorder.php",
+    "bytes": 1218,
+    "sha256": "d4c49387d046c37a24a2dc5e518499684bd612a227166664f7f5e3b0a5099d16",
+    "functions": [
+      "objectId",
+      "success"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/SourceMaterialService.php",
+    "bytes": 5735,
+    "sha256": "82d3c0799de0bb4600cd1cb6ae601edfb32fd3f4ed5fb1b088b9e83819970d16",
+    "functions": [
+      "context",
+      "assertResponsible",
+      "validateSource",
+      "assertTransition",
+      "create",
+      "update",
+      "linkUsage"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/Storage/CreativeDriveUploadService.php",
+    "bytes": 6406,
+    "sha256": "65582b154957d02358974aeb3f71ecb51b0288e56fe4ade891f4f0328f4d1efa",
+    "functions": [
+      "upload"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/Storage/GoogleDriveHttpClient.php",
+    "bytes": 1657,
+    "sha256": "46b9e864326cab195bc6b1f105b98644ebe5cd6b3d30f552d6d92c4485e7ef7f",
+    "functions": [
+      "json"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/GoogleDriveOAuthService.php",
+    "bytes": 4357,
+    "sha256": "1a1b678231385940cf4c486b84998e716b64db3bb7cbc802e74dea36a399f756",
+    "functions": [
+      "__construct",
+      "authorizationUrl",
+      "callback",
+      "settings"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/Storage/GoogleDriveStorageProvider.php",
+    "bytes": 10458,
+    "sha256": "55f2daff6c855715ff7ba79c9f3c75e0943930572f2f75fe11f2498ba84e18e8",
+    "functions": [
+      "__construct",
+      "slug",
+      "accessTokenForConnection",
+      "validateConnection",
+      "listChanges",
+      "fetchMetadata",
+      "previewUrl",
+      "directLink",
+      "uploadFile",
+      "validateItem",
+      "initialInventory",
+      "incrementalChanges",
+      "mapFile",
+      "auth",
+      "accessToken",
+      "assertId"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/Storage/GoogleDriveUploadTransport.php",
+    "bytes": 6094,
+    "sha256": "4b626132ba61649a469826e88e52bf9b5fed8ec494ecf0c81d29aedc1a3c2b28",
+    "functions": [
+      "upload",
+      "probe",
+      "nextOffset",
+      "assertSessionUrl",
+      "call"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/LocalStorageProvider.php",
+    "bytes": 2053,
+    "sha256": "d4f5c77ab8e2548fc08ca72a70bef06f78e386fbaf30160ff797ef935a230b4f",
+    "functions": [
+      "slug",
+      "validateConnection",
+      "listChanges",
+      "fetchMetadata",
+      "previewUrl",
+      "directLink"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/MockAIAnalysisProvider.php",
+    "bytes": 949,
+    "sha256": "2c6d3bc77f4bc53d124eacbc7318c27dd03e372f1a488f28ddb4ba5cc1cc9f5d",
+    "functions": [
+      "slug",
+      "transcribe",
+      "extractOnScreenText"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/StorageCredentials.php",
+    "bytes": 1214,
+    "sha256": "aa1cf8fd8d08604c03bb7ca0812460029bb3af41a899032376785db34189741c",
+    "functions": [
+      "key",
+      "seal",
+      "open"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/YouTubeResumableTransport.php",
+    "bytes": 5256,
+    "sha256": "fa7d398e7c69bfe5cd7bd68bafcbfd62e1062d688e3768a5f257b5beb382d55d",
+    "functions": [
+      "upload",
+      "driveChunk",
+      "next",
+      "videoId",
+      "assertSession",
+      "call"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Services/Storage/YouTubeUploadService.php",
+    "bytes": 5610,
+    "sha256": "7a6c25fcddca2162a7934f3ce0fbab8166e132c8badae1de8546b7d69296db9b",
+    "functions": [
+      "__construct",
+      "upload"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/StorageSyncService.php",
+    "bytes": 8998,
+    "sha256": "849321dabe71e1ab831e4a767792550e76653cfc6c57341f088ae1bf75d79521",
+    "functions": [
+      "registerProvider",
+      "providerFor",
+      "runSync",
+      "runRow"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/StructuredSearchService.php",
+    "bytes": 10716,
+    "sha256": "60e0e45ca191a0ce5e683dda78764f5d210146046055672e5fb4df8fadcb2c4b",
+    "functions": [
+      "prepareSearch",
+      "runResilient",
+      "runCoreFallback",
+      "creativePredicates",
+      "requestPredicates",
+      "run"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/UploadedFilenameSearchService.php",
+    "bytes": 1474,
+    "sha256": "903ebe4274a45a275ede21dc3917396080632884e1b7984ed721fd530f52b375",
+    "functions": [
+      "creativeIds"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/WorkflowService.php",
+    "bytes": 40328,
+    "sha256": "3c0558b91c8d3be165192e47f10ce1c7118a40fc31ef86a5c13fe833e8b4f916",
+    "functions": [
+      "requestStatusSlugs",
+      "isValidRequestTransition",
+      "db",
+      "statusId",
+      "createVersion",
+      "nextTypedSequence",
+      "finishWork",
+      "reviewRequest",
+      "publishRequest",
+      "setOutcomeForRequest",
+      "setOutcomeForCreative",
+      "startProduction",
+      "startProductionForCreative",
+      "assignEditor",
+      "updateRequestStatus",
+      "requestRefresh",
+      "requestRefreshForCreative",
+      "refreshRecommendations"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Models\\Notification",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Services/WorkspaceScope.php",
+    "bytes": 7743,
+    "sha256": "d2f8cacc11e7b6e7b4c7090bcaf48531622f700e9d19e84c08ea669bdff76898",
+    "functions": [
+      "allowedBrandIds",
+      "currentAllowedBrandIds",
+      "canAccessBrand",
+      "canAccessCreative",
+      "workspaceIdsForUser",
+      "brandFilterSql",
+      "brandFilterSqlNamed",
+      "assertCanAccessBrand",
+      "assertCanAccessBrandOfRequest",
+      "assertCanAccessBrandOfCreative"
+    ],
+    "tables": [],
+    "core_dependencies": [
+      "App\\Core\\Services\\AuthService",
+      "App\\Database\\Database"
+    ]
+  },
+  {
+    "path": "Support/CreativeView.php",
+    "bytes": 1541,
+    "sha256": "47dd08e9b0504587bab90a2cc1c23717994f5c1e5afe0b0200f6a54d1c7f847e",
+    "functions": [
+      "__construct",
+      "badgeClass",
+      "versionLabel"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  },
+  {
+    "path": "Tools/import_legacy_csv.php",
+    "bytes": 11639,
+    "sha256": "7081a681b6f524b911e421b0af26458d23767f16fd75cbdccc7b0e2d1877da3e",
+    "functions": [
+      "statusId",
+      "platformId",
+      "findOrCreateUser",
+      "findOrCreateProduct",
+      "nextPublicCode",
+      "parseTimestampNote"
+    ],
+    "tables": [],
+    "core_dependencies": []
+  }
+]

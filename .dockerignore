@@ -1,0 +1,15 @@
+**/.venv
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/db.sqlite3*
+**/media
+**/staticfiles
+**/dist
+**/test-results
+**/playwright-report
+**/backups
+.env
+.git
+reference

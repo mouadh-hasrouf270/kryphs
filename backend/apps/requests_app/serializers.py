@@ -12,7 +12,7 @@ from apps.requests_app.models import (
 
 class RequestDeliverableInputSerializer(serializer_for(RequestDeliverable)):
     title = serializers.CharField(max_length=200)
-    quantity = serializers.IntegerField(min_value=1, default=1)
+    quantity = serializers.IntegerField(min_value=1, max_value=1, default=1)
 
     class Meta:
         model = RequestDeliverable
@@ -48,6 +48,7 @@ class RequestDeliverableSerializer(BaseRequestDeliverableSerializer):
     """
 
     sequence = serializers.IntegerField(read_only=True)
+    quantity = serializers.IntegerField(min_value=1, max_value=1, default=1)
 
     class Meta(BaseRequestDeliverableSerializer.Meta):
         validators = []

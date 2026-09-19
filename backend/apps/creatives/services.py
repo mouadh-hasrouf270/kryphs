@@ -39,6 +39,16 @@ def bind_deliverable(data, instance=None):
 @transaction.atomic
 def create_creative(actor, data):
     data = bind_deliverable(data)
+    if data.get("deliverable"):
+        from apps.requests_app.models import RequestDeliverable
+        from apps.requests_app.services import require_primary_editor
+
+        child = RequestDeliverable.objects.select_for_update().get(pk=data["deliverable"].pk)
+        if Creative.objects.filter(deliverable=child).exists():
+            raise ValidationError(
+                {"deliverable": "A creative already exists. Open it and create a new version."}
+            )
+        require_primary_editor(child)
     require(actor, data["workspace"].pk, "edit_creatives")
     validate_scope(actor, data["workspace"].pk, data.get("brand"))
     tags = data.pop("tags", [])
@@ -55,6 +65,10 @@ def create_creative(actor, data):
 def editor_access(actor, creative):
     require(actor, creative.workspace_id, "submit_version")
     validate_scope(actor, creative.workspace_id, creative.brand)
+    if creative.deliverable_id:
+        from apps.requests_app.services import require_primary_editor
+
+        require_primary_editor(creative.deliverable)
     if creative.owner_id != actor.pk and "assign_editors" not in permissions(
         actor, creative.workspace_id
     ):

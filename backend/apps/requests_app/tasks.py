@@ -132,6 +132,22 @@ class TasksView(APIView):
         )
         existing = {row["id"] for row in result if row["kind"] == "deliverable"}
         add(assigned.exclude(pk__in=existing), "deliverable", "production_assignment")
+        # One identity can match canonical assignment and several responsibilities.
+        unique = {}
+        roles = {}
+        for child in (
+            deliverables.filter(assignments__user=request.user)
+            .distinct()
+            .prefetch_related("assignments")
+        ):
+            roles[str(child.pk)] = sorted(
+                {a.role for a in child.assignments.all() if a.user_id == request.user.pk}
+            )
+        for row in result:
+            if row["kind"] == "deliverable":
+                row["assignment_roles"] = roles.get(row["id"], ["editor"])
+            unique.setdefault((row["kind"], row["id"]), row)
+        result = list(unique.values())
         result.sort(
             key=lambda row: (not row.get("overdue", False), row.get("priority") != "urgent")
         )

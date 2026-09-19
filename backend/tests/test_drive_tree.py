@@ -102,6 +102,16 @@ def test_organization_retries_use_provider_ids_without_duplicate_folders(team, d
             value = f"id-{len(allocated)}"
             allocated.append(value)
             return httpx.Response(200, json={"ids": [value]})
+        if method == "GET" and url.endswith("/files"):
+            parent = kwargs["params"]["q"].split("'")[1]
+            return httpx.Response(
+                200,
+                json={
+                    "files": [item for item in remote.values() if parent in item.get("parents", [])]
+                },
+            )
+        if method == "PATCH":
+            remote[url.rsplit("/", 1)[1]].update(kwargs["json"])
         if method == "POST":
             data = kwargs["json"]
             assert data["id"] not in remote
@@ -119,15 +129,32 @@ def test_organization_retries_use_provider_ids_without_duplicate_folders(team, d
         count = len(posts)
         organize(drive)
         assert len(posts) == count
-        assert {"Source", "Creatives", "Masters", "v001", "Library", "Clips", "Context"} <= {
-            p["name"] for p in posts
-        }
+        assert {"Source", "Creatives", "Library", "Clips", "Context"} <= {p["name"] for p in posts}
+        assert any(p["name"].startswith("v001-") for p in posts)
+        assert not any(p["name"] == "Masters" for p in posts)
         folder = DriveFolderMapping.objects.get(
             entity_type="creative", entity_id=team["creative"].pk, folder_role="root"
         )
         remote[folder.drive_folder_id]["name"] = "Renamed outside app"
         organize(drive)
         assert len(posts) == count
+        from apps.storage.drive_names import creative_folder_name, workspace_folder_name
+
+        assert remote[folder.drive_folder_id]["name"] == creative_folder_name(team["creative"])
+        ws_mapping = DriveFolderMapping.objects.get(
+            entity_type="workspace", entity_id=team["ws"].pk, folder_role="root"
+        )
+        old_id = ws_mapping.drive_folder_id
+        remote[old_id]["name"] = "WS-aabbccdd_old-name"
+        parents_before = {key: item.get("parents") for key, item in remote.items()}
+        organize(drive)
+        ws_mapping.refresh_from_db()
+        assert ws_mapping.drive_folder_id == old_id
+        assert remote[old_id]["name"] == workspace_folder_name(team["ws"])
+        assert (
+            len(posts) == count
+            and {key: item.get("parents") for key, item in remote.items()} == parents_before
+        )
 
 
 def test_missing_root_and_disconnected_authorization_fail_safely(drive):

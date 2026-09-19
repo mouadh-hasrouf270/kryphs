@@ -1,0 +1,97 @@
+{
+  "backup": ".qa\\pre-integrity-20260919-035755.sqlite3",
+  "counts": {
+    "requests_app.CreativeRequest": {
+      "before": 29,
+      "after": 29
+    },
+    "requests_app.RequestDeliverable": {
+      "before": 31,
+      "after": 40
+    },
+    "creatives.Creative": {
+      "before": 33,
+      "after": 33
+    },
+    "creatives.CreativeVersion": {
+      "before": 36,
+      "after": 36
+    },
+    "storage.StorageObject": {
+      "before": 46,
+      "after": 46
+    },
+    "storage.CreativeFile": {
+      "before": 13,
+      "after": 13
+    },
+    "storage.Upload": {
+      "before": 0,
+      "after": 0
+    },
+    "storage.DriveFolderMapping": {
+      "before": 31,
+      "after": 31
+    }
+  },
+  "rebound_creatives": [
+    {
+      "creative": "716786a8-5c24-41ee-812f-e8585485ce54",
+      "original_deliverable": "f60ebf82-dbf3-40fa-9427-c657f2e1211a",
+      "deliverable": "ff164dcc-4d3b-5836-8556-bc8ba6f0263b"
+    },
+    {
+      "creative": "b565f281-b5ec-440c-9176-00eeec52de78",
+      "original_deliverable": "f60ebf82-dbf3-40fa-9427-c657f2e1211a",
+      "deliverable": "11770295-a6c3-5fd3-bbf2-84c70583edb0"
+    },
+    {
+      "creative": "4d27aa00-fb68-43aa-bea6-79c8f674ddfe",
+      "original_deliverable": "9b736f67-42e7-4d5e-ad74-ac35dbd5c1c7",
+      "deliverable": "27792066-ed9c-5958-a0c4-351d647a230d"
+    },
+    {
+      "creative": "ffcaf96e-9f0f-4c7b-af32-139fcb1e6438",
+      "original_deliverable": "9b736f67-42e7-4d5e-ad74-ac35dbd5c1c7",
+      "deliverable": "9fc7b1f1-c19c-547d-96bc-8c10a0209826"
+    },
+    {
+      "creative": "e3321d45-4739-40cd-98cd-770174ea4f80",
+      "original_deliverable": "9c72f45c-deb6-4bbc-971e-9ed8c2756dad",
+      "deliverable": "37dee1cd-acb6-5201-ad1d-5fbe5328277d"
+    },
+    {
+      "creative": "251c5449-3680-4bc4-81c7-11a513a7d456",
+      "original_deliverable": "ed02ece0-12e3-483d-a956-583b0fc392a8",
+      "deliverable": "faa9402b-1e2e-5c66-80c1-439b846b95ff"
+    },
+    {
+      "creative": "b910709e-a107-46cc-b95d-e4670e0d0cc9",
+      "original_deliverable": "ed02ece0-12e3-483d-a956-583b0fc392a8",
+      "deliverable": "ea32fd56-8231-52ba-94d8-8d2482ee24ce"
+    }
+  ],
+  "retained_original_quantities": [
+    {
+      "deliverable": "2003292b-7deb-4309-989f-39291b4bbf75",
+      "quantity": 3
+    },
+    {
+      "deliverable": "ed02ece0-12e3-483d-a956-583b0fc392a8",
+      "quantity": 3
+    },
+    {
+      "deliverable": "9c72f45c-deb6-4bbc-971e-9ed8c2756dad",
+      "quantity": 1
+    },
+    {
+      "deliverable": "9b736f67-42e7-4d5e-ad74-ac35dbd5c1c7",
+      "quantity": 3
+    },
+    {
+      "deliverable": "f60ebf82-dbf3-40fa-9427-c657f2e1211a",
+      "quantity": 3
+    }
+  ],
+  "all_original_ids_preserved": true
+}

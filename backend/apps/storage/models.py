@@ -4,6 +4,7 @@ from apps.common.models import Scoped
 
 
 class StorageConnection(Scoped):
+    auto_upload_default = models.BooleanField(default=False)
     name = models.CharField(max_length=200, default="", blank=True)
     provider = models.CharField(
         max_length=40,
@@ -28,8 +29,19 @@ class StorageConnection(Scoped):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["workspace", "brand"],
+                condition=models.Q(auto_upload_default=True),
+                name="one_auto_drive_destination",
+            )
+        ]
+
 
 class StorageObject(Scoped):
+    upload_key = models.CharField(max_length=64, null=True, blank=True, unique=True, editable=False)
     connection = models.ForeignKey(
         "storage.StorageConnection",
         on_delete=models.PROTECT,
@@ -77,6 +89,24 @@ class DriveFolderMapping(Scoped):
             models.UniqueConstraint(
                 fields=["connection", "entity_type", "entity_id", "folder_role"],
                 name="drive_folder_identity",
+            ),
+        ]
+
+
+class DriveNameReservation(Scoped):
+    """Names are presentation; durable provider/mapping identities remain separate."""
+
+    connection = models.ForeignKey("storage.StorageConnection", on_delete=models.PROTECT)
+    identity = models.CharField(max_length=100)
+    parent_id = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    base_name = models.CharField(max_length=200)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["connection", "identity"], name="drive_name_owner"),
+            models.UniqueConstraint(
+                fields=["connection", "parent_id", "name"], name="drive_sibling_name"
             ),
         ]
 

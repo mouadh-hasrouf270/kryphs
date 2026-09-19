@@ -47,6 +47,17 @@ def serializer_for(model):
                         display_label(obj) for obj in getattr(instance, field.name).all()
                     ]
             result["relation_labels"] = labels
+            if instance._meta.model_name == "requestdeliverable":
+                from apps.creatives.models import Creative
+                from apps.requests_app.services import valid_primary_editor
+
+                result["editor_ready"] = valid_primary_editor(instance)
+                result["existing_creative"] = str(
+                    Creative.objects.filter(deliverable=instance)
+                    .values_list("pk", flat=True)
+                    .first()
+                    or ""
+                )
             if instance._meta.model_name == "creativefile":
                 asset = instance.storage_object
                 result["asset"] = {
@@ -63,6 +74,20 @@ def serializer_for(model):
                         "external_id",
                     ]
                 }
+                from apps.storage.models import Upload
+
+                upload = (
+                    Upload.objects.filter(
+                        storage_object=asset,
+                        version_id=instance.version_id,
+                        provider="google_drive",
+                    )
+                    .order_by("-created_at")
+                    .first()
+                )
+                result["asset"]["drive_upload"] = (
+                    {"status": upload.status} if upload else asset.metadata.get("drive_upload")
+                )
             return result
 
         def get_fields(self):
@@ -127,6 +152,31 @@ def serializer_for(model):
                 if attrs.get("quantity", 1) < 1:
                     raise serializers.ValidationError({"quantity": "Must be at least one."})
             brand = attrs.get("brand", getattr(self.instance, "brand", None))
+            if model._meta.model_name == "storageconnection" and attrs.get(
+                "auto_upload_default", getattr(self.instance, "auto_upload_default", False)
+            ):
+                if (
+                    not brand
+                    or attrs.get("provider", getattr(self.instance, "provider", "google_drive"))
+                    != "google_drive"
+                ):
+                    raise serializers.ValidationError(
+                        {
+                            "auto_upload_default": "Select a brand and Google Drive provider for the automatic destination."
+                        }
+                    )
+                if (
+                    model.objects.filter(
+                        workspace_id=workspace, brand=brand, auto_upload_default=True
+                    )
+                    .exclude(pk=getattr(self.instance, "pk", None))
+                    .exists()
+                ):
+                    raise serializers.ValidationError(
+                        {
+                            "auto_upload_default": "Another connection is already the automatic destination for this brand."
+                        }
+                    )
             for key in ["title", "name"]:
                 if (
                     any(f.name == key for f in model._meta.fields)
@@ -345,6 +395,6 @@ def serializer_for(model):
     # and rejects the request *before* perform_create can allocate the sequence.
     # Keep the database UniqueConstraint as the integrity boundary and remove the
     # inappropriate client-side validator for this server-managed field.
-    if model._meta.model_name == "requestdeliverable":
+    if model._meta.model_name in ["requestdeliverable", "storageconnection"]:
         ScopedSerializer.Meta.validators = []
     return ScopedSerializer

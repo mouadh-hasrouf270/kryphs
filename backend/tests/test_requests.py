@@ -45,7 +45,7 @@ def test_request_atomic_children_platform_edit_and_catalog(team, client_for):
         "deliverables": [
             {
                 "title": "Video",
-                "quantity": 3,
+                "quantity": 1,
                 "platform": str(p1.pk),
                 "requirements": "Arabic",
                 "duration_target": 30,
@@ -58,7 +58,7 @@ def test_request_atomic_children_platform_edit_and_catalog(team, client_for):
     obj = CreativeRequest.objects.get(pk=r.json()["id"])
     assert obj.deliverables.count() == 2
     child = obj.deliverables.get(sequence=1)
-    assert child.quantity == 3 and child.duration_target == 30 and child.requirements == "Arabic"
+    assert child.quantity == 1 and child.duration_target == 30 and child.requirements == "Arabic"
     assert child.assigned_editor == team["people"]["editor"]
     for ids in [[str(p2.pk)], []]:
         r = c.patch(url(team, f"requests/{obj.pk}"), {"platforms": ids}, format="json")
@@ -173,31 +173,35 @@ def test_bound_creative_and_parent_start(team, client_for):
     ],
 )
 def test_quantity(team, quantity, states, expected):
-    child = RequestDeliverable.objects.create(
-        workspace=team["ws"],
-        brand=team["brand"],
-        request=team["request"],
-        sequence=1,
-        quantity=quantity,
-    )
-    for i, state in enumerate(states):
-        Creative.objects.create(
+    # Legacy quantities now become individual deliverables; preserve request precedence.
+    children = []
+    for i in range(quantity):
+        child = RequestDeliverable.objects.create(
             workspace=team["ws"],
             brand=team["brand"],
             request=team["request"],
-            deliverable=child,
-            code=f"Q-{i}",
-            status=state,
+            sequence=i + 1,
+            quantity=1,
         )
-    recalculate_deliverable(child)
-    assert child.status == expected
+        children.append(child)
+        if i < len(states):
+            Creative.objects.create(
+                workspace=team["ws"],
+                brand=team["brand"],
+                request=team["request"],
+                deliverable=child,
+                code=f"Q-{i}",
+                status=states[i],
+            )
+        recalculate_deliverable(child)
+    assert recalculate_request(team["request"]).status == expected
     if expected == "approved":
         from django.utils import timezone
 
-        Creative.objects.filter(deliverable=child).first().pk
-        Creative.objects.filter(deliverable=child).update(archived_at=timezone.now())
-        recalculate_deliverable(child)
-        assert child.status != "approved"
+        Creative.objects.filter(deliverable__in=children).update(archived_at=timezone.now())
+        for child in children:
+            recalculate_deliverable(child)
+        assert recalculate_request(team["request"]).status == "approved"
 
 
 def test_add_deliverable_after_request_creation_assigns_sequence_server_side(team, client_for):

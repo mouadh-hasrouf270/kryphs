@@ -34,6 +34,25 @@ def assert_editor(user, workspace, brand):
     validate_scope(user, workspace.pk, brand)
 
 
+def valid_primary_editor(deliverable):
+    if not deliverable.assigned_editor_id:
+        return False
+    try:
+        assert_editor(deliverable.assigned_editor, deliverable.workspace, deliverable.brand)
+    except (ValidationError, PermissionDenied):
+        return False
+    return True
+
+
+def require_primary_editor(deliverable):
+    # Callers may hold a related-object cache from before editor removal.
+    deliverable = RequestDeliverable.objects.select_related("assigned_editor", "workspace", "brand").get(pk=deliverable.pk)
+    if not valid_primary_editor(deliverable):
+        raise ValidationError(
+            {"assigned_editor": "Assign an active, permitted editor before starting production."}
+        )
+
+
 @transaction.atomic
 def create_request(actor, data, deliverables=None):
     # Model.objects.create() cannot accept many-to-many values.  The API serializer
@@ -99,8 +118,12 @@ def assign(actor, obj, editor):
     require(actor, obj.workspace_id, "assign_editors")
     validate_scope(actor, obj.workspace_id, obj.brand)
     assert_editor(editor, obj.workspace, obj.brand)
-    obj = type(obj).objects.get(pk=obj.pk)
-    if obj.status not in ["new", "assigned", "in_production", "changes_requested"]:
+    obj = type(obj).objects.select_for_update().get(pk=obj.pk)
+    restoring_editor = isinstance(obj, RequestDeliverable) and not obj.assigned_editor_id
+    if (
+        obj.status not in ["new", "assigned", "in_production", "changes_requested"]
+        and not restoring_editor
+    ):
         raise ValidationError("Assignment is closed at this stage.")
     field = "assigned_editor" if isinstance(obj, RequestDeliverable) else "owner"
     setattr(obj, field, editor)
@@ -132,7 +155,11 @@ def assign(actor, obj, editor):
 def start(actor, obj):
     require(actor, obj.workspace_id, "submit_version")
     validate_scope(actor, obj.workspace_id, obj.brand)
-    obj = type(obj).objects.get(pk=obj.pk)
+    obj = type(obj).objects.select_for_update().get(pk=obj.pk)
+    if isinstance(obj, RequestDeliverable):
+        require_primary_editor(obj)
+    elif getattr(obj, "deliverable_id", None):
+        require_primary_editor(obj.deliverable)
     owner_id = getattr(obj, "owner_id", getattr(obj, "assigned_editor_id", None))
     if owner_id != actor.pk and "assign_editors" not in __import__(
         "apps.workspaces.policies", fromlist=["permissions"]
@@ -167,25 +194,13 @@ def rollup(creative):
 def recalculate_deliverable(obj):
     from apps.creatives.models import Creative
 
-    states = list(
-        Creative.objects.filter(deliverable=obj, archived_at__isnull=True).values_list(
-            "status", flat=True
-        )
-    )
-    if "changes_requested" in states:
-        status = "changes_requested"
-    elif states.count("published") >= obj.quantity:
-        status = "published"
-    elif sum(s in ["approved", "published"] for s in states) >= obj.quantity:
-        status = "approved"
-    elif len(states) >= obj.quantity and all(
-        s in ["ready_for_review", "approved", "published"] for s in states
-    ):
-        status = "ready_for_review"
-    elif states or obj.status not in ["new", "assigned"]:
-        status = "in_production"
+    creative = Creative.objects.filter(deliverable=obj).first()
+    if creative and creative.status not in ["new", "assigned"]:
+        status = creative.status
+    elif obj.status not in ["new", "assigned"]:
+        status = obj.status  # Removing an editor or archiving never erases production history.
     else:
-        status = "assigned" if obj.assigned_editor_id else "new"
+        status = "assigned" if valid_primary_editor(obj) else "new"
     obj.status = status
     obj.save(update_fields=["status", "updated_at"])
     return obj
@@ -194,7 +209,8 @@ def recalculate_deliverable(obj):
 def recalculate_request(obj):
     from apps.creatives.models import Creative
 
-    states = list(obj.deliverables.values_list("status", flat=True))
+    children = list(obj.deliverables.select_related("assigned_editor", "workspace", "brand"))
+    states = [child.status for child in children]
     if not states:
         states = list(
             Creative.objects.filter(request=obj, archived_at__isnull=True).values_list(
@@ -203,6 +219,8 @@ def recalculate_request(obj):
         )
     if states:
         obj.status = aggregate(states)
+        if children and obj.status in ["new", "assigned"]:
+            obj.status = "assigned" if all(valid_primary_editor(d) for d in children) else "new"
     if obj.status in ["approved", "published"] and not obj.completed_at:
         obj.completed_at = timezone.now()
     if obj.status == "published" and not obj.published_at:

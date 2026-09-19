@@ -49,7 +49,7 @@ def detect(file):
     )
 
 
-def upload_local(actor, creative, file, role):
+def upload_local(actor, creative, file, role, idempotency_key=None):
     editor_access(actor, creative)
     if not file or file.size <= 0 or file.size > settings.MAX_UPLOAD_BYTES:
         raise ValidationError("File is empty or exceeds the upload limit.")
@@ -58,6 +58,13 @@ def upload_local(actor, creative, file, role):
         raise ValidationError("Create a draft version before attaching files.")
     if role not in dict(CreativeFile._meta.get_field("role").choices):
         raise ValidationError("Invalid file role.")
+    upload_key = (
+        hashlib.sha256(
+            f"{actor.pk}:{creative.pk}:{version.pk}:{idempotency_key}".encode()
+        ).hexdigest()
+        if idempotency_key
+        else None
+    )
     mime = detect(file)
     width = height = 0
     if mime.startswith("image/"):
@@ -83,7 +90,32 @@ def upload_local(actor, creative, file, role):
                 checksum.update(chunk)
                 out.write(chunk)
         with transaction.atomic():
-            version.refresh_from_db()
+            version = CreativeVersion.objects.select_for_update().get(pk=version.pk)
+            if upload_key:
+                existing = StorageObject.objects.filter(upload_key=upload_key).first()
+                if existing:
+                    if (
+                        existing.checksum != checksum.hexdigest()
+                        or not CreativeFile.objects.filter(
+                            storage_object=existing, version=version, role=role
+                        ).exists()
+                    ):
+                        raise ValidationError(
+                            "This upload key was already used for a different file or role."
+                        )
+                    path.unlink(missing_ok=True)
+                    existing.drive_upload = existing.metadata.get(
+                        "drive_upload", {"queued": False, "reason": "drive_not_connected"}
+                    )
+                    from apps.storage.mirrors import mirror_after_commit
+
+                    logical_file = CreativeFile.objects.get(
+                        storage_object=existing, version=version, role=role
+                    )
+                    transaction.on_commit(
+                        lambda: mirror_after_commit(actor, logical_file, existing)
+                    )
+                    return existing
             if version.status != "draft":
                 raise ValidationError("The version is no longer a draft.")
             if (
@@ -107,8 +139,10 @@ def upload_local(actor, creative, file, role):
                 width=width,
                 height=height,
                 local_path=relative,
+                upload_key=upload_key,
+                metadata={"original_filename": file.name, "uploaded_by": str(actor.pk)},
             )
-            CreativeFile.objects.create(
+            creative_file = CreativeFile.objects.create(
                 workspace=creative.workspace,
                 brand=creative.brand,
                 creative=creative,
@@ -117,6 +151,10 @@ def upload_local(actor, creative, file, role):
                 role=role,
             )
             record(actor, creative, "upload_complete", {"file_id": str(obj.pk)})
+            from apps.storage.mirrors import mirror_after_commit
+
+            obj.drive_upload = {"queued": False, "reason": "pending_commit"}
+            transaction.on_commit(lambda: mirror_after_commit(actor, creative_file, obj))
         return obj
     except Exception:
         path.unlink(missing_ok=True)
@@ -164,16 +202,27 @@ def enqueue_transfer(actor, connection, data):
         obj = master(version)
     else:
         editor_access(actor, version.creative)
-        files = CreativeFile.objects.filter(
-            version=version, role="master", active=True
-        ).select_related("storage_object")
+        files = CreativeFile.objects.filter(version=version, active=True).select_related(
+            "storage_object"
+        )
+        files = (
+            files.filter(storage_object_id=data["storage_object"])
+            if data.get("storage_object")
+            else files.filter(role="master")
+        )
         if files.count() != 1:
             raise ValidationError("Attach exactly one local master first.")
-        obj = files.first().storage_object
+        file = files.first()
+        obj = file.storage_object
     if obj.provider != "local":
         raise ValidationError("This upload requires a local master asset.")
     if connection.provider != "google_drive" or connection.status != "connected":
         raise ValidationError("Connect Google first.")
+    if provider == "google_drive":
+        from apps.storage.mirrors import enqueue_drive_mirror
+
+        result = enqueue_drive_mirror(actor, file, connection=connection, retry=True)
+        return Upload.objects.get(pk=result["upload_id"])
     privacy = data.get("privacy", "private")
     if privacy not in ["private", "unlisted", "public"]:
         raise ValidationError("Invalid privacy setting.")

@@ -80,6 +80,7 @@ class RequestDeliverable(Scoped):
     )
     aspect_ratio = models.CharField(max_length=200, default="9:16", blank=True)
     quantity = models.PositiveIntegerField(default=1)
+    legacy_quantity = models.PositiveIntegerField(null=True, blank=True, editable=False)
     duration_target = models.PositiveIntegerField(default=0)
     requirements = models.TextField(blank=True)
     hook = models.TextField(blank=True)

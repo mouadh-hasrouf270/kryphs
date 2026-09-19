@@ -42,6 +42,8 @@ def sync_primary(deliverable):
 @transaction.atomic
 def save_assignment(actor, data, instance=None):
     data = dict(data)
+    if instance:
+        data.setdefault("notes", instance.notes)
     deliverable = data.get("deliverable", getattr(instance, "deliverable", None))
     deliverable = RequestDeliverable.objects.select_for_update().get(pk=deliverable.pk)
     role = data.get("role", getattr(instance, "role", None))
@@ -86,6 +88,11 @@ def save_assignment(actor, data, instance=None):
     instance.user, instance.role = user, role
     instance.notes = data.get("notes", instance.notes)
     instance.save()
+    from apps.requests_app.services import recalculate_deliverable, recalculate_request
+
+    deliverable.refresh_from_db()
+    recalculate_deliverable(deliverable)
+    recalculate_request(deliverable.request)
     record(
         actor,
         instance,
@@ -97,6 +104,7 @@ def save_assignment(actor, data, instance=None):
 
 @transaction.atomic
 def remove_assignment(actor, obj):
+    deliverable = RequestDeliverable.objects.select_for_update().get(pk=obj.deliverable_id)
     can_manage(actor, obj.deliverable, obj.role)
     record(
         actor,
@@ -104,8 +112,11 @@ def remove_assignment(actor, obj):
         "production_assignment_removed",
         {"person": str(obj.user), "responsibility": obj.role},
     )
-    if obj.role == "editor":
-        obj.deliverable.assigned_editor = None
-        obj.deliverable.save(update_fields=["assigned_editor"])
+    if obj.role == "editor" and deliverable.assigned_editor_id == obj.user_id:
+        deliverable.assigned_editor = None
+        deliverable.save(update_fields=["assigned_editor"])
     obj.delete()
-    # Removing a person must not undo already completed production work.
+    from apps.requests_app.services import recalculate_deliverable, recalculate_request
+
+    recalculate_deliverable(deliverable)
+    recalculate_request(deliverable.request)

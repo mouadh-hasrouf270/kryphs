@@ -29,7 +29,7 @@ def make_deliverable(team, client_for):
         {
             "request": request_id,
             "title": "Added later",
-            "quantity": 2,
+            "quantity": 1,
             "hook": "Opening",
             "script": "Full script",
             "notes": "Production notes",

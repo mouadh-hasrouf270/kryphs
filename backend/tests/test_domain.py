@@ -64,6 +64,7 @@ def test_sibling_does_not_approve_whole_request(team):
         request=req,
         sequence=1,
         title="One",
+        assigned_editor=p["editor"],
         status="in_production",
     )
     RequestDeliverable.objects.create(

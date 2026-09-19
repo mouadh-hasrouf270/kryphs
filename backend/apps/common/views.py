@@ -308,9 +308,13 @@ class ScopedViewSet(viewsets.ModelViewSet):
             from apps.storage.services import upload_local
 
             asset = upload_local(
-                request.user, obj, request.FILES.get("file"), data.get("role", "master")
+                request.user,
+                obj,
+                request.FILES.get("file"),
+                data.get("role", "master"),
+                idempotency_key=request.headers.get("Idempotency-Key"),
             )
-            return Response({"id": str(asset.pk)}, status=201)
+            return Response({"id": str(asset.pk), "drive_upload": asset.drive_upload}, status=201)
         elif self.resource == "storage/objects" and operation == "download":
             from apps.storage.services import local_path
 

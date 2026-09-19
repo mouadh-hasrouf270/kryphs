@@ -165,6 +165,12 @@ def upsert(connection, metadata):
     if not identity:
         raise ProviderFailure("Google response did not contain a file identity.")
     with transaction.atomic():
+        previous = (
+            StorageObject.objects.filter(connection=connection, external_id=identity)
+            .values_list("metadata", flat=True)
+            .first()
+            or {}
+        )
         obj, _ = StorageObject.objects.update_or_create(
             connection=connection,
             external_id=identity,
@@ -178,7 +184,10 @@ def upsert(connection, metadata):
                 "checksum": metadata.get("md5Checksum", ""),
                 "parents": metadata.get("parents", []),
                 "active": not metadata.get("trashed", False),
-                "metadata": {"availability": "trashed" if metadata.get("trashed") else "available"},
+                "metadata": {
+                    **previous,
+                    "availability": "trashed" if metadata.get("trashed") else "available",
+                },
             },
         )
     return obj
@@ -221,9 +230,22 @@ def resume(upload, heartbeat=lambda: None):
             )
         folder_id = None
         if upload.provider == "google_drive":
+            from pathlib import PurePosixPath
+
+            from apps.storage.drive_names import drive_file_name, reserve_name
             from apps.storage.drive_tree import upload_folder
 
             folder_id = upload_folder(upload, heartbeat)
+            desired = drive_file_name(upload)
+            remote_name = reserve_name(
+                connection,
+                headers,
+                folder_id,
+                desired,
+                f"upload:{upload.pk}",
+                upload.external_id,
+                extension=PurePosixPath(desired).suffix,
+            )
         upload.status = "initializing"
         upload.save(update_fields=["status"])
         if upload.provider == "youtube":
@@ -241,12 +263,15 @@ def resume(upload, heartbeat=lambda: None):
                 "fields": "id,name,mimeType,size,md5Checksum,parents",
             }
             body = {
-                "name": upload.storage_object.filename,
+                "name": remote_name,
                 "appProperties": {
                     "app": "creative_manager",
                     "workspace_id": str(upload.workspace_id),
                     "version_id": str(upload.version_id),
                     "upload_id": str(upload.pk),
+                    "creative_id": str(upload.version.creative_id),
+                    "source_storage_object_id": str(upload.storage_object_id),
+                    "source_role": upload.role,
                 },
             }
             body["parents"] = [folder_id]
@@ -324,6 +349,14 @@ def confirm(upload, result):
     upload.save()
     if upload.provider == "google_drive":
         obj = upsert(upload.connection, result)
+        obj.metadata = {
+            **obj.metadata,
+            "source_storage_object_id": str(upload.storage_object_id),
+            "source_role": upload.role,
+            "upload_id": str(upload.pk),
+            "original_filename": upload.storage_object.filename,
+        }
+        obj.save(update_fields=["metadata"])
         # Preserve approved file history. Drive copy is a separate export attachment.
         from apps.storage.models import CreativeFile
 

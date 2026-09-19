@@ -78,6 +78,8 @@ APPEND_ONLY = set(
     "performance comments relationships source-usages clip-usages context-links".split()
 )
 HIDDEN = {
+    "upload_key",
+    "legacy_quantity",
     "submission_key",
     "submission_hash",
     "credentials_encrypted",

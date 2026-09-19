@@ -8,7 +8,6 @@ import re
 from collections import deque
 
 from django.utils import timezone
-from django.utils.text import slugify
 
 from apps.audit.services import record
 from apps.storage.models import DriveFolderMapping, StorageObject, SyncRun
@@ -175,6 +174,7 @@ def sync(connection, heartbeat=lambda: None):
 
 
 def ensure_folder(connection, headers, entity, role, name, parent, heartbeat=lambda: None):
+    from apps.storage.drive_names import reserve_name
     from apps.storage.google import DRIVE, ProviderFailure, request
 
     heartbeat()
@@ -215,6 +215,17 @@ def ensure_folder(connection, headers, entity, role, name, parent, heartbeat=lam
                     },
                     json={},
                 )
+            desired = reserve_name(
+                connection, headers, parent, name, f"folder:{mapping.pk}", mapping.drive_folder_id
+            )
+            if item.get("name") != desired:
+                request(
+                    "PATCH",
+                    DRIVE + "/files/" + identity(mapping.drive_folder_id),
+                    headers=headers,
+                    params={"supportsAllDrives": "true", "fields": "id"},
+                    json={"name": desired},
+                )
             return mapping.drive_folder_id
         if response.status_code != 404:
             raise ProviderFailure("Cannot verify the mapped Drive folder.")
@@ -244,7 +255,9 @@ def ensure_folder(connection, headers, entity, role, name, parent, heartbeat=lam
         )
     body = {
         "id": mapping.drive_folder_id,
-        "name": name[:200],
+        "name": reserve_name(
+            connection, headers, parent, name, f"folder:{mapping.pk}", mapping.drive_folder_id
+        ),
         "mimeType": FOLDER,
         "appProperties": {
             "app": "creative_manager",
@@ -270,6 +283,7 @@ def ensure_folder(connection, headers, entity, role, name, parent, heartbeat=lam
 def organize(connection, heartbeat=lambda: None, creative=None):
     from apps.catalog.models import Brand
     from apps.creatives.models import Creative
+    from apps.storage import drive_names
     from apps.storage.google import ProviderFailure, token
 
     headers = {"Authorization": "Bearer " + token(connection)}
@@ -286,9 +300,9 @@ def organize(connection, heartbeat=lambda: None, creative=None):
         connection.save(update_fields=["root_folder_id"])
     validate_root(connection, headers)
     ws = connection.workspace
-    ws_root = folder(ws, "root", f"WS-{str(ws.pk)[:8]}_{ws.slug}", connection.root_folder_id)
+    ws_root = folder(ws, "root", drive_names.workspace_folder_name(ws), connection.root_folder_id)
     brand = Brand.objects.get(pk=connection.brand_id)
-    brand_root = folder(brand, "root", f"BR-{str(brand.pk)[:8]}_{brand.slug}", ws_root)
+    brand_root = folder(brand, "root", drive_names.brand_folder_name(brand), ws_root)
     roots = {
         name: folder(brand, name.lower(), name, brand_root)
         for name in ["Library", "Clips", "Context", "Campaigns", "Requests"]
@@ -310,18 +324,22 @@ def organize(connection, heartbeat=lambda: None, creative=None):
             campaign_root = folder(
                 campaign,
                 "root",
-                f"CA-{str(campaign.pk)[:8]}_{slugify(campaign.name) or 'campaign'}",
+                drive_names.campaign_folder_name(campaign),
                 roots["Campaigns"],
             )
             parent = folder(campaign, "requests", "Requests", campaign_root)
-        req_root = folder(req, "root", req.code, parent)
+        req_root = folder(req, "root", drive_names.request_folder_name(req), parent)
         folder(req, "source", "Source", req_root)
         request_roots[req.pk] = folder(req, "creatives", "Creatives", req_root)
     for row in rows:
-        root = folder(row, "root", row.code, request_roots.get(row.request_id, roots["Library"]))
-        folder(row, "masters", "Masters", root)
+        root = folder(
+            row,
+            "root",
+            drive_names.creative_folder_name(row),
+            request_roots.get(row.request_id, roots["Library"]),
+        )
         for version in row.versions.all():
-            folder(version, "root", f"v{version.version_number:03}", root)
+            folder(version, "root", drive_names.version_folder_name(version), root)
 
 
 def upload_folder(upload, heartbeat=lambda: None):

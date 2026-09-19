@@ -72,6 +72,12 @@ class Creative(Scoped):
     archived_at = models.DateTimeField(null=True, blank=True)
     tags = models.ManyToManyField("catalog.Tag", blank=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(fields=["deliverable"], name="one_creative_per_deliverable")
+        ]
+
     def __str__(self):
         return self.title
 

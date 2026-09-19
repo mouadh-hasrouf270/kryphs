@@ -70,7 +70,7 @@ when opening Add Deliverable immediately on mobile.
 
 Backend checks and migration drift checks passed. Complete pytest: **89 passed**.
 Ruff passed. Frontend unit tests: **11 passed**. Typecheck, lint and build passed.
-Browser verification results are recorded below after the final run.
+Complete Playwright browser suite: **10 passed (2.3 minutes)**, including desktop, Arabic mobile, file history, Drive fixture, revisions, performance, experiments and isolation. This is the baseline before the subsequent workflow-integrity/automatic-Drive pass.
 
 ## Limits
 

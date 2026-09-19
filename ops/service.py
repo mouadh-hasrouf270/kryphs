@@ -23,8 +23,53 @@ def main():
     db = Path(os.environ["DATABASE_PATH"])
     db.parent.mkdir(parents=True, exist_ok=True)
     Path(os.environ["MEDIA_ROOT"]).mkdir(parents=True, exist_ok=True)
-    for command in [["migrate", "--noinput"], ["check", "--deploy", "--fail-level", "WARNING"], ["collectstatic", "--noinput"]]:
-        subprocess.run([sys.executable, "manage.py", *command], cwd=BACKEND, check=True)
+
+    # Prepare database first.
+    subprocess.run(
+        [sys.executable, "manage.py", "migrate", "--noinput"],
+        cwd=BACKEND,
+        check=True,
+    )
+
+    # Optional first-admin bootstrap for managed deployments such as Render.
+    admin_email = os.getenv("DJANGO_SUPERUSER_EMAIL", "").strip().lower()
+    admin_password = os.getenv("DJANGO_SUPERUSER_PASSWORD", "")
+
+    if admin_email and admin_password:
+        bootstrap_admin = """
+    import os
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
+    email = os.environ["DJANGO_SUPERUSER_EMAIL"].strip().lower()
+    password = os.environ["DJANGO_SUPERUSER_PASSWORD"]
+
+    user, created = User.objects.get_or_create(email=email)
+    user.is_staff = True
+    user.is_superuser = True
+    user.is_active = True
+    user.set_password(password)
+    user.save()
+
+    print("SUPERUSER_READY:", email)
+    """
+        subprocess.run(
+            [sys.executable, "manage.py", "shell", "-c", bootstrap_admin],
+            cwd=BACKEND,
+            check=True,
+        )
+
+    # Production validation and static assets.
+    for command in [
+        ["check", "--deploy", "--fail-level", "WARNING"],
+        ["collectstatic", "--noinput"],
+    ]:
+        subprocess.run(
+            [sys.executable, "manage.py", *command],
+            cwd=BACKEND,
+            check=True,
+        )
+    
     port = int(os.getenv("PORT", "8000"))
     # Managed platform TLS terminates at its trusted reverse proxy.
     web = [sys.executable, "-m", "waitress", f"--listen=0.0.0.0:{port}", "--threads=4", "--trusted-proxy=*", "--trusted-proxy-headers=x-forwarded-proto", "config.wsgi:application"]
